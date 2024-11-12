@@ -4,10 +4,11 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
-        'plus-jakarta': ['"Plus Jakarta Sans"', 'sans-serif'],
+        'plus-jakarta': ["Plus Jakarta Sans"],
       },
       colors: {
         'primary-blue': "#635FC7",
@@ -19,7 +20,7 @@ export default {
         "tertiary-gray": "#828FA3",
         "primary-light-gray": "#E4EBFA",
         "secondary-light-gray": "#F4F7FD",
-        "red": "EA5555",
+        "red": "#EA5555",
         "secondary-red": "#FF9898"
       },
     },
