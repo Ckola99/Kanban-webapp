@@ -5,24 +5,30 @@ import hamburger from "../assets/icon-vertical-ellipsis.svg";
 
 const Header = () => {
 	return (
-		<div className=" w-full dark:bg-primary-gray bg-white font-plus-jakarta grid grid-cols-[70%_30%] place-content-center h-16 p-4">
-			<div className="grid grid-cols-[10%_90%] place-content-center">
-				<img src={logoLightMobile} alt="" />
-				<h3 className="large-heading text-black dark:text-white grid grid-cols-[65%_35%] pl-4 place-items-center">
-					Platform Launch
-					<img src={dropdown} alt="" className="-ml-[82px]"/>
-				</h3>
-			</div>
-			<div className="grid grid-cols-[80%_20%]">
-				<button className="w-12 h-8 bg-secondary-blue bg-opacity-25 rounded-2xl place-self-end align-items-center place-items-center">
+		<div className="h-16 w-full dark:bg-secondary-black flex px-4 justify-between bg-white fixed left-0 right-0 top-0">
+			{/* left side */}
+			<div className="flex-center">
+				<img src={logoLightMobile} alt="logo" />
+				<div className="flex-center ml-3">
+					<h3 className="dark:text-white text-[18px] font-bold mr-2">
+						Platform Launch
+					</h3>
+
 					<img
-						src={addTask}
-						alt=""
-						className=""
+						src={dropdown}
+						alt="drop down arrow"
 					/>
+
+				</div>
+			</div>
+
+			{/* right side */}
+			<div className="flex items-center">
+				<button className="bg-primary-blue bg-opacity-25 w-12 h-8 flex-center rounded-2xl mr-4">
+					<img src={addTask} alt="" />
 				</button>
-				<button className=" grid content-center">
-					<img src={hamburger} alt="" className="justify-self-end" />
+				<button>
+					<img src={hamburger} alt="hamburger button" />
 				</button>
 			</div>
 		</div>

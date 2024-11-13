@@ -1,13 +1,14 @@
 import React from "react";
 import DarkModeToggle from "../components/DarkModeToggle";
 import Header from "../components/Header";
+import Board from "../components/Board";
 
 function App() {
 
 	return (
-		<div className="dark:bg-primary-black h-[100vh] bg-">
+		<div className="font-plus-jakarta dark:bg-primary-black min-h-screen bg-primary-light-gray flex-center">
 			<Header />
-			<DarkModeToggle className="mt-[300px]" />
+			<Board />
 		</div>
 	);
 }
