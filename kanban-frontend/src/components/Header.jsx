@@ -1,11 +1,16 @@
 import logoLightMobile from "../assets/logo-mobile.svg";
-import dropdown from "../assets/icon-chevron-down.svg";
+import chevronDown from "../assets/icon-chevron-down.svg";
+import chevronUp from "../assets/icon-chevron-up.svg";
 import addTask from "../assets/icon-add-task-mobile.svg";
 import hamburger from "../assets/icon-vertical-ellipsis.svg";
 
-const Header = () => {
+const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
+	const toggleDropdown = () => {
+		setIsDropdownOpen((prev) => !prev);
+	};
+
 	return (
-		<div className="h-16 w-full dark:bg-secondary-black flex px-4 justify-between bg-white fixed left-0 right-0 top-0">
+		<div className="h-16 w-full dark:bg-secondary-black flex px-4 justify-between bg-white fixed left-0 right-0 top-0 z-50">
 			{/* left side */}
 			<div className="flex-center">
 				<img src={logoLightMobile} alt="logo" />
@@ -14,11 +19,28 @@ const Header = () => {
 						Platform Launch
 					</h3>
 
-					<img
-						src={dropdown}
-						alt="drop down arrow"
-					/>
-
+					<button
+						onClick={toggleDropdown}
+						aria-label={
+							isDropdownOpen
+								? "Close dropdown"
+								: "Open dropdown"
+						}
+						className="hover:cursor-pointer"
+					>
+						<img
+							src={
+								isDropdownOpen
+									? chevronUp
+									: chevronDown
+							}
+							alt={
+								isDropdownOpen
+									? "Close dropdown"
+									: "Open dropdown"
+							}
+						/>
+					</button>
 				</div>
 			</div>
 
@@ -28,7 +50,10 @@ const Header = () => {
 					<img src={addTask} alt="" />
 				</button>
 				<button>
-					<img src={hamburger} alt="hamburger button" />
+					<img
+						src={hamburger}
+						alt="hamburger button"
+					/>
 				</button>
 			</div>
 		</div>

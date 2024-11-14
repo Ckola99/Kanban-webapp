@@ -1,3 +1,5 @@
+import Columns from "./Columns";
+
 const Board = () => {
   return (
 		<div className="">
@@ -10,7 +12,8 @@ const Board = () => {
 					+ Add New Column
 				</button>
 			</div>
-			
+			<Columns />
+
 		</div>
   );
 }
