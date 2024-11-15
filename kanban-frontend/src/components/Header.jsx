@@ -55,7 +55,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 			<div className="flex items-center">
 				<button
 					aria-label="Add Task"
-					className="bg-primary-blue bg-opacity-25 w-12 h-8 flex-center rounded-2xl mr-4"
+					className={`bg-primary-blue ${currentBoard.columns.length === 0 ? 'bg-opacity-25' : 'bg-opacity-100'} w-12 h-8 flex-center rounded-2xl mr-4 `}
 				>
 					<img
 						src={addTask}

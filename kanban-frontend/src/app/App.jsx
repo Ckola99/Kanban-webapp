@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Header from "../components/Header";
 import Board from "../components/Board";
 import BoardsModal from "../components/BoardsModal";
@@ -7,11 +7,15 @@ function App() {
 
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const closeDropdown = () => setIsDropdownOpen(false);
-	const currentBoard = useSelector(currentBoardSelector);
+
+	useEffect(() => {
+    		const savedTheme = localStorage.getItem("theme") || "light";
+    		document.body.classList.toggle("dark", savedTheme === "dark");
+  	}, []);
 
 
 	return (
-		<div className="font-plus-jakarta dark:bg-primary-black min-h-screen bg-primary-light-gray flex-center">
+		<div className={`font-plus-jakarta dark:bg-primary-black min-h-screen bg-primary-light-gray`}>
 			<Header setIsDropdownOpen={setIsDropdownOpen} isDropdownOpen={isDropdownOpen}/>
 			{isDropdownOpen && <BoardsModal isDropdownOpen={isDropdownOpen} close={closeDropdown}/>}
 			<Board />

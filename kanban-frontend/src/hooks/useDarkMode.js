@@ -12,11 +12,11 @@ const useDarkMode = () => {
 	};
 
 	useEffect(() => {
-		if (isDarkMode) {
-			document.body.classList.add('dark');
-		} else {
-			document.body.classList.remove('dark');
-		}
+		// Dynamically update the body class based on the theme state.
+		const theme = isDarkMode ? 'dark' : 'light';
+
+		//dynamically adds the dark class or removes it with the 2nd parameter. If isDarkMode is true, the dark class is added to <body>.
+		document.body.classList.toggle('dark', isDarkMode);
 	}, [isDarkMode]);
 
 	return [isDarkMode, toggleDarkMode];
