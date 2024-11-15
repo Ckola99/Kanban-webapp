@@ -3,24 +3,31 @@ import chevronDown from "../assets/icon-chevron-down.svg";
 import chevronUp from "../assets/icon-chevron-up.svg";
 import addTask from "../assets/icon-add-task-mobile.svg";
 import hamburger from "../assets/icon-vertical-ellipsis.svg";
+import { useSelector } from "react-redux";
+import { currentBoardSelector } from "../features/boards/boardsSlice"
+import PropTypes from "prop-types";
 
 const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 	const toggleDropdown = () => {
 		setIsDropdownOpen((prev) => !prev);
 	};
 
+	const currentBoard = useSelector(currentBoardSelector);
+
 	return (
 		<div className="h-16 w-full dark:bg-secondary-black flex px-4 justify-between bg-white fixed left-0 right-0 top-0 z-50">
 			{/* left side */}
 			<div className="flex-center">
-				<img src={logoLightMobile} alt="logo" />
+				<img src={logoLightMobile} alt="Company logo" />
 				<div className="flex-center ml-3">
 					<h3 className="dark:text-white text-[18px] font-bold mr-2">
-						Platform Launch
+						{currentBoard.name}
 					</h3>
 
 					<button
 						onClick={toggleDropdown}
+						aria-expanded={isDropdownOpen}
+						aria-controls="boards-modal"
 						aria-label={
 							isDropdownOpen
 								? "Close dropdown"
@@ -46,18 +53,29 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 
 			{/* right side */}
 			<div className="flex items-center">
-				<button className="bg-primary-blue bg-opacity-25 w-12 h-8 flex-center rounded-2xl mr-4">
-					<img src={addTask} alt="" />
+				<button
+					aria-label="Add Task"
+					className="bg-primary-blue bg-opacity-25 w-12 h-8 flex-center rounded-2xl mr-4"
+				>
+					<img
+						src={addTask}
+						alt="Add Task Icon"
+					/>
 				</button>
-				<button>
+				<button aria-label="Menu">
 					<img
 						src={hamburger}
-						alt="hamburger button"
+						alt="Open menu"
 					/>
 				</button>
 			</div>
 		</div>
 	);
+};
+
+Header.propTypes = {
+	setIsDropdownOpen: PropTypes.func.isRequired,
+	isDropdownOpen: PropTypes.bool.isRequired,
 };
 
 export default Header;

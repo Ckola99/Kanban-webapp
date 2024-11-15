@@ -1,4 +1,7 @@
 import Columns from "./Columns";
+import { currentBoardSelector } from "../features/boards/boardsSlice"
+import { useSelector } from "react-redux";
+
 
 const Board = () => {
   return (
