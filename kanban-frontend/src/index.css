@@ -120,4 +120,8 @@ body {
 	.body-med {
 		@apply font-bold text-xs
 	}
+
+	.body-large {
+		@apply font-medium text-[13px]
+	}
 }

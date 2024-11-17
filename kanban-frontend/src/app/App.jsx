@@ -5,7 +5,7 @@ import BoardsModal from "../components/BoardsModal";
 
 function App() {
 
-	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
 	const closeDropdown = () => setIsDropdownOpen(false);
 
 	useEffect(() => {
