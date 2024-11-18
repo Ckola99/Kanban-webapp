@@ -17,18 +17,6 @@
 			rel="stylesheet"
 		/>
 		<title>Kanban Task Management app</title>
-		<script>
-			// Retrieve the saved theme from localStorage. Default to 'light' if none is found.
-			const savedTheme =
-				localStorage.getItem("theme") || "light";
-
-			// Apply the saved theme class to the <body> tag.
-			if (savedTheme === "dark") {
-				document.body.classList.add("dark");
-			} else {
-				document.body.classList.remove("dark");
-			}
-		</script>
 	</head>
 	<body>
 		<div id="root"></div>

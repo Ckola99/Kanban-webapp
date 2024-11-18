@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import CardDetailsModal from "./CardDetailsModal";
+import { useSelector } from "react-redux";
+import { currentBoardSelector } from "../features/boards/boardsSlice";
 
-const Card = ({ task }) => {
+const Card = ({ taskId }) => {
 	const [isModalOpen, setModalOpen] = useState(false);
+  const currentBoard = useSelector(currentBoardSelector);
 
+  const task = currentBoard.columns.flatMap((column) => column.tasks).find((task) => task.id === taskId);
+
+  if (!task) return null;
+  
 	return (
 		<>
 			<div
@@ -33,18 +40,9 @@ const Card = ({ task }) => {
 	);
 };
 
+
 Card.propTypes = {
-	task: PropTypes.shape({
-		title: PropTypes.string.isRequired,
-		description: PropTypes.string,
-		status: PropTypes.string.isRequired,
-		subtasks: PropTypes.arrayOf(
-			PropTypes.shape({
-				title: PropTypes.string.isRequired,
-				isCompleted: PropTypes.bool.isRequired,
-			}).isRequired
-		).isRequired,
-	}).isRequired,
+	taskId: PropTypes.string.isRequired, // Pass taskId instead of task prop
 };
 
 export default Card;

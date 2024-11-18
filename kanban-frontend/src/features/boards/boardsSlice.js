@@ -5,7 +5,6 @@ const savedBoardIndex = window.localStorage.getItem("currentBoardIndex");
 const initialState = {
 	boards: data.boards,
 	currentBoardIndex: savedBoardIndex ? parseInt(savedBoardIndex, 10) : 0,
-	selectedCard: null,
 }
 
 const boardsSlice = createSlice({
@@ -16,16 +15,30 @@ const boardsSlice = createSlice({
 			state.currentBoardIndex = action.payload;
 			window.localStorage.setItem("currentBoardIndex", action.payload);
 		},
-		selectCard: (state, action) => {
-			state.selectedCard = action.payload; // Set the selected card details
-		},
-		clearSelectedCard: (state) => {
-			state.selectedCard = null; // Clear the selected card when modal is closed
-		},
+		updatedCardStatus: (state, action) => {
+			const { cardId, newStatus } = action.payload;
+
+			const sourceColumn = state.boards[state.currentBoardIndex].columns.find( column =>
+				column.tasks.some(task => task.id === cardId)
+			)
+
+			if (sourceColumn) {
+				const taskIndex = sourceColumn.tasks.findIndex(task => task.id === cardId);
+				const [task] = sourceColumn.tasks.splice(taskIndex, 1);
+
+				task.status = newStatus;
+
+				const targetColumn = state.boards[state.currentBoardIndex].columns.find(column =>
+					column.name === newStatus
+				);
+
+				// Add the task to the new column
+        			targetColumn.tasks.push(task);
+			}
+		}
 	},
 });
 
 export default boardsSlice.reducer;
 export const currentBoardSelector = (state) => state.boards.boards[state.boards.currentBoardIndex];
-export const { setCurrentBoard, selectCard, clearSelectedCard } = boardsSlice.actions;
-export const selectedCardSelector = (state) => state.boards.selectedCard;
+export const { setCurrentBoard, updatedCardStatus } = boardsSlice.actions;

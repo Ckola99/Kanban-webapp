@@ -14,7 +14,7 @@ const Column = ({ name, tasks, circleColor }) => (
 			</h1>
 		</div>
 		{tasks.map((task, index) => (
-			<Card key={index} task={task} />
+			<Card key={index} taskId={task.id} />
 		))}
 	</div>
 );
