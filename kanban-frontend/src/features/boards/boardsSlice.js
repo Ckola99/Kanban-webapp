@@ -15,7 +15,7 @@ const boardsSlice = createSlice({
 			state.currentBoardIndex = action.payload;
 			window.localStorage.setItem("currentBoardIndex", action.payload);
 		},
-		updatedCardStatus: (state, action) => {
+		updateCardStatus: (state, action) => {
 			const { cardId, newStatus } = action.payload;
 
 			const sourceColumn = state.boards[state.currentBoardIndex].columns.find( column =>
@@ -35,10 +35,26 @@ const boardsSlice = createSlice({
 				// Add the task to the new column
         			targetColumn.tasks.push(task);
 			}
+		},
+
+		updateSubtask: (state, action) => {
+			const { subtaskId, isCompleted } = action.payload;
+
+			const task = state.boards[state.currentBoardIndex].columns
+				.flatMap(column => column.tasks) // Get all tasks from all columns
+				.find(task => task.subtasks.some(sub => sub.id === subtaskId));  // Find the task containing the subtask
+
+			if (task) {
+				const subtask = task.subtasks.find(sub => sub.id === subtaskId);
+				if (subtask) {
+					subtask.isCompleted = isCompleted;
+				}
+
+			}
 		}
 	},
 });
 
 export default boardsSlice.reducer;
 export const currentBoardSelector = (state) => state.boards.boards[state.boards.currentBoardIndex];
-export const { setCurrentBoard, updatedCardStatus } = boardsSlice.actions;
+export const { setCurrentBoard, updateCardStatus, updateSubtask } = boardsSlice.actions;
