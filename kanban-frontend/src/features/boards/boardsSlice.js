@@ -51,10 +51,23 @@ const boardsSlice = createSlice({
 				}
 
 			}
+		},
+
+		deleteTask: (state, action) => {
+			const { cardId } = action.payload;
+
+			const currentBoard = state.boards[state.currentBoardIndex];
+			for (const column of currentBoard.columns) {
+				const taskIndex = column.tasks.findIndex(task => task.id === cardId);
+				if (taskIndex !== -1) {
+					column.tasks.splice(taskIndex, 1);
+					break;
+				}
+			}
 		}
 	},
 });
 
 export default boardsSlice.reducer;
 export const currentBoardSelector = (state) => state.boards.boards[state.boards.currentBoardIndex];
-export const { setCurrentBoard, updateCardStatus, updateSubtask } = boardsSlice.actions;
+export const { setCurrentBoard, updateCardStatus, updateSubtask, deleteTask } = boardsSlice.actions;

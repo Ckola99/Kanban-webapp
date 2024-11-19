@@ -10,7 +10,8 @@ import { useSelector, useDispatch } from "react-redux";
 import MiniModal from "./MiniModal";
 import Subtasks from "./Subtasks"
 
-const CardDetailsModal = ({ card, onClose }) => {
+
+const CardDetailsModal = ({ card, onClose, openDeleteTaskModal, openEditTaskModal }) => {
 	console.log("Card in modal", card);
 
 	const currentBoard = useSelector(currentBoardSelector);
@@ -21,6 +22,7 @@ const CardDetailsModal = ({ card, onClose }) => {
 
 	// mini modal state
 	const [ miniModalOpen, setMiniModalOpen ] = useState(false)
+
 
 	const handleStatusChange = (event) => {
 		setSelectedStatus(event.target.value); // Update local state only
@@ -58,7 +60,13 @@ const CardDetailsModal = ({ card, onClose }) => {
 				className="bg-white dark:bg-secondary-black  p-6 rounded-lg w-full flex flex-col gap-5"
 				onClick={(e) => e.stopPropagation()}
 			>
-				<div className="flex justify-between">
+				<button
+					onClick={handleModalClose}
+					className="text-red h-5 w-5 font-bold"
+				>
+					Close
+				</button>
+				<div className="flex justify-between relative">
 					<h1 className="large-heading dark:text-white">
 						{card.title}
 					</h1>
@@ -67,9 +75,14 @@ const CardDetailsModal = ({ card, onClose }) => {
 							src={hamburger}
 							alt="Open menu"
 							className="min-h-5 min-w-[4.62px]"
-							onClick={()=> setMiniModalOpen(!miniModalOpen)}
+							onClick={() =>
+								setMiniModalOpen(
+									!miniModalOpen
+								)
+							}
 						/>
 					</button>
+					{miniModalOpen && <MiniModal closeCard = {handleModalClose} openDeleteTaskModal={openDeleteTaskModal} openEditTaskModal={openEditTaskModal}/>}
 				</div>
 				<p className="body-large text-tertiary-gray">
 					{card.description}
@@ -85,7 +98,12 @@ const CardDetailsModal = ({ card, onClose }) => {
 						}{" "}
 						of {card.subtasks.length})
 					</h2>
-					<Subtasks handleSubtaskToggle={handleSubtaskToggle} card={card}/>
+					<Subtasks
+						handleSubtaskToggle={
+							handleSubtaskToggle
+						}
+						card={card}
+					/>
 					<div className="flex flex-col mt-5 gap-2">
 						<label
 							htmlFor="columns"
@@ -126,7 +144,6 @@ const CardDetailsModal = ({ card, onClose }) => {
 					</div>
 				</form>
 			</div>
-			{miniModalOpen && (<MiniModal />)}
 		</div>
 	);
 };
@@ -145,6 +162,8 @@ CardDetailsModal.propTypes = {
 		).isRequired,
 	}).isRequired,
 	onClose: PropTypes.func.isRequired,
+	openDeleteTaskModal: PropTypes.func.isRequired,
+	openEditTaskModal: PropTypes.func.isRequired,
 };
 
 export default CardDetailsModal;

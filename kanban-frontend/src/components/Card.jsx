@@ -3,15 +3,19 @@ import PropTypes from "prop-types";
 import CardDetailsModal from "./CardDetailsModal";
 import { useSelector } from "react-redux";
 import { currentBoardSelector } from "../features/boards/boardsSlice";
+import DeleteTaskModal from "./DeleteTaskModal";
+import EditTaskModal from "./EditTaskModal";
 
 const Card = ({ taskId }) => {
 	const [isModalOpen, setModalOpen] = useState(false);
+	const [isDeleteTaskModalOpen, setDeleteTaskModalOpen] = useState(false)
+	const [isEditTaskModalOpen, setEditTaskModalOpen] = useState(false)
   const currentBoard = useSelector(currentBoardSelector);
 
   const task = currentBoard.columns.flatMap((column) => column.tasks).find((task) => task.id === taskId);
 
   if (!task) return null;
-  
+
 	return (
 		<>
 			<div
@@ -34,8 +38,12 @@ const Card = ({ taskId }) => {
 				<CardDetailsModal
 					card={task}
 					onClose={() => setModalOpen(false)}
+					openDeleteTaskModal={() => setDeleteTaskModalOpen(true)}
+					openEditTaskModal={() => setEditTaskModalOpen(true)}
 				/>
 			)}
+			{isDeleteTaskModalOpen && <DeleteTaskModal card={ task } closeDeleteTaskModal={() => setDeleteTaskModalOpen(false)}/>}
+			{isEditTaskModalOpen && <EditTaskModal taskCard={task}/>}
 		</>
 	);
 };
