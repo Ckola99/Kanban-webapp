@@ -94,7 +94,7 @@ const AddNewTaskModal = ({ closeAddTaskModal }) => {
 										? errors.title.message
 										: `e.g. build user interface`
 							}
-							className={` ${errors.title ? 'border-red placeholder:text-red ' : 'border-secondary-gray'}body-large p-3 bg-inherit border border-secondary-gray rounded-md dark:text-white`}
+							className={` ${errors.title ? 'border-red placeholder:text-red ' : 'dark:border-secondary-gray'}body-large p-3 bg-inherit border rounded-md dark:text-white`}
 							type="text"
 							{...register("title")}
 						/>
@@ -104,7 +104,7 @@ const AddNewTaskModal = ({ closeAddTaskModal }) => {
 					<div className="flex flex-col gap-1">
 						<label  className="font-bold dark:text-white text-xs text-tertiary-gray">Description</label>
 						<textarea
-							className="dark:bg-inherit border border-secondary-gray rounded-md dark:text-white p-3 body-large"
+							className="dark:bg-inherit border dar:border-secondary-gray rounded-md dark:text-white p-3 body-large"
 							{...register(
 								"description"
 							)}
@@ -123,7 +123,7 @@ const AddNewTaskModal = ({ closeAddTaskModal }) => {
 										? errors.subtasks[index].title.message
 										: `e.g. Subtask ${index + 1}`
 									}
-									className={`w-full body-large p-3 bg-inherit border  rounded-md dark:text-white ${errors.subtasks?.[index]?.title ? 'border-red placeholder:text-red ' : 'border-secondary-gray'}`}
+									className={`w-full body-large p-3 bg-inherit border  rounded-md dark:text-white ${errors.subtasks?.[index]?.title ? 'border-red placeholder:text-red ' : 'dark:border-secondary-gray'}`}
 									type="text"
 									{...register(`subtasks.${index}.title`
 									)}
@@ -150,7 +150,7 @@ const AddNewTaskModal = ({ closeAddTaskModal }) => {
 					<div className="flex flex-col gap-1">
 						<label className="text-xs font-bold dark:text-white text-tertiary-gray">Status</label>
 						<select
-							className="font-bold dark:text-white text-xs border border-secondary-gray px-3 py-2 rounded-md appearance-none bg-[url('./assets/icon-chevron-down.svg')] bg-no-repeat bg-[center_right_12px] dark:bg-inherit"
+							className="font-bold dark:text-white text-xs border dark:border-secondary-gray px-3 py-2 rounded-md appearance-none bg-[url('./assets/icon-chevron-down.svg')] bg-no-repeat bg-[center_right_12px] dark:bg-inherit"
 							{...register("status")}
 							value={selectedStatus}
 							onChange={(e) =>
