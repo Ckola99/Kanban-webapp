@@ -6,8 +6,12 @@ import hamburger from "../assets/icon-vertical-ellipsis.svg";
 import { useSelector } from "react-redux";
 import { currentBoardSelector } from "../features/boards/boardsSlice"
 import PropTypes from "prop-types";
+import React, { useState } from 'react';
+import AddNewTaskModal from './AddNewTaskModal'
 
 const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
+
+	const [isAddNewTaskModalOpen, setAddNewTaskModalOpen] = useState(false)
 	const toggleDropdown = () => {
 		setIsDropdownOpen((prev) => !prev);
 	};
@@ -54,6 +58,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 			{/* right side */}
 			<div className="flex items-center">
 				<button
+					onClick={ currentBoard.columns.length > 0 && (() => setAddNewTaskModalOpen(true))}
 					aria-label="Add Task"
 					className={`bg-primary-blue ${currentBoard.columns.length === 0 ? 'bg-opacity-25' : 'bg-opacity-100'} w-12 h-8 flex-center rounded-2xl mr-4 `}
 				>
@@ -69,6 +74,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 					/>
 				</button>
 			</div>
+			{isAddNewTaskModalOpen && <AddNewTaskModal closeAddTaskModal={() => setAddNewTaskModalOpen(false)} />}
 		</div>
 	);
 };

@@ -43,7 +43,7 @@ const Card = ({ taskId }) => {
 				/>
 			)}
 			{isDeleteTaskModalOpen && <DeleteTaskModal card={ task } closeDeleteTaskModal={() => setDeleteTaskModalOpen(false)}/>}
-			{isEditTaskModalOpen && <EditTaskModal taskCard={task}/>}
+			{isEditTaskModalOpen && <EditTaskModal taskCard={task} closeEditTaskModal={() => setEditTaskModalOpen(false)}/>}
 		</>
 	);
 };

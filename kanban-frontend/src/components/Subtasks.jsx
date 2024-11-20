@@ -18,11 +18,11 @@ const Subtasks = ({ card, handleSubtaskToggle }) => {
 						className={` ${
 							sub.isCompleted
 								? "line-through dark:text-primary-gray text-secondary-gray"
-								: ""
-						} font-bold text-xs flex items-center gap-3 dark:text-white`}
+								: "dark:text-white"
+						} font-bold text-xs flex items-center gap-3 `}
 					>
 						<input
-							className="dark:bg-primary-blue"
+							className="dark:bg-primary-blue checked:bg-primary-blue dark:checked:bg-primary-blue"
 							type="checkbox"
 							name="subtasks"
 							value={sub.title}
