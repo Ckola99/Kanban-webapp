@@ -102,7 +102,9 @@ const EditTaskModal = ({ taskCard, closeEditTaskModal }) => {
 							Title
 						</label>
 						<input
-							className="body-large p-3 bg-inherit border dark:border-secondary-gray rounded-md dark:text-white"
+							 className={`body-large p-3 bg-inherit border rounded-md dark:text-white ${
+                						errors.title ? "border-red" : "dark:border-secondary-gray"
+              						}`}
 							type="text"
 							{...register("title")}
 						/>

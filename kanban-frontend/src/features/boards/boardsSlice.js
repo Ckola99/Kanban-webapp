@@ -6,6 +6,7 @@ const savedBoardIndex = window.localStorage.getItem("currentBoardIndex");
 const initialState = {
 	boards: data.boards,
 	currentBoardIndex: savedBoardIndex ? parseInt(savedBoardIndex, 10) : 0,
+	editBoardModal: false,
 }
 
 const boardsSlice = createSlice({
@@ -106,7 +107,7 @@ const boardsSlice = createSlice({
 					if (updatedData.subtasks) {
 
 						updatedData.subtasks.forEach(subtask => {
-							if(!subtask.id) {
+							if (!subtask.id) {
 								subtask.id = uuidv4();
 							}
 						});
@@ -118,23 +119,79 @@ const boardsSlice = createSlice({
 		},
 
 		addNewTask: (state, action) => {
-    			const { newTask } = action.payload;
-    			const currentBoard = state.boards[state.currentBoardIndex];
+			const { newTask } = action.payload;
+			const currentBoard = state.boards[state.currentBoardIndex];
 
-    			// Push the new task to the current board's tasks
-    			currentBoard.columns.forEach(column => {
-        		if (column.name === newTask.status) {
-            			column.tasks.push({
-                		...newTask,
-                		id: uuidv4(), // Generate a unique task ID
-            		});
+			// Push the new task to the current board's tasks
+			currentBoard.columns.forEach(column => {
+				if (column.name === newTask.status) {
+					column.tasks.push({
+						...newTask,
+						id: uuidv4(), // Generate a unique task ID
+					});
+				}
+			});
+		},
+
+		deleteBoard: (state, action) => {
+			const boardName = action.payload;
+
+			const deletedBoardIndex = state.boards.findIndex(board => board.name === boardName)
+
+			state.boards = state.boards.filter(board => board.name !== boardName);
+			if (deletedBoardIndex === state.currentBoardIndex) {
+				if (state.boards.length > 0) {
+					state.currentBoardIndex = 0;
+					window.localStorage.setItem("currentBoardIndex", 0);
+				} else {
+					state.currentBoardIndex = 0;
+					window.localStorage.removeItem("currentBoardIndex");
+				}
+			}
+		},
+
+		addBoard: (state, action) => { },
+
+		editBoard: (state, action) => {
+    const { boardName, updatedData } = action.payload;
+
+    // Find the index of the board by its name
+    const boardIndex = state.boards.findIndex(board => board.name === boardName);
+
+    if (boardIndex !== -1) {
+        // Update the board's details
+        const board = state.boards[boardIndex];
+
+        // Update the board's name if provided
+        if (updatedData.name) {
+            board.name = updatedData.name;
         }
-    });
-}
+
+        // Update the board's columns if provided
+        if (updatedData.columns) {
+            board.columns = updatedData.columns.map(column => {
+                // Ensure every column has tasks (if not provided, default to an empty array)
+                return {
+                    ...column,
+                    tasks: column.tasks || [],
+                };
+            });
+        }
+    }
+},
+
+		editBoardModalOpen: (state) => {
+			state.editBoardModal = true;
+		},
+
+		editBoardModalClose: (state) => {
+			state.editBoardModal = false;
+		},
 
 	},
 });
 
 export default boardsSlice.reducer;
 export const currentBoardSelector = (state) => state.boards.boards[state.boards.currentBoardIndex];
-export const { setCurrentBoard, updateCardStatus, updateSubtask, deleteTask, editTask, addNewTask } = boardsSlice.actions;
+export const { setCurrentBoard, updateCardStatus, updateSubtask, deleteTask, editTask, addNewTask, deleteBoard,  editBoardModalOpen, editBoardModalClose, editBoard } = boardsSlice.actions;
+export const selectEditBoardModalState = (state) => state.boards.editBoardModal;
