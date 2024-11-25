@@ -18,7 +18,7 @@ const DeleteTaskModal = ({ closeDeleteTaskModal, card }) => {
 			onClick={closeDeleteTaskModal}
 			className="fixed inset-0 bg-black bg-opacity-50 flex-center p-4 z-[60]"
 		>
-			<div className="dark:bg-secondary-black bg-white p-5 flex flex-col gap-4 rounded-lg">
+			<div className="dark:bg-secondary-black bg-white p-5 flex flex-col gap-4 rounded-lg max-w-[480px]">
 				<h2 className="large-heading text-red">
 					Delete this task?
 				</h2>
@@ -27,9 +27,9 @@ const DeleteTaskModal = ({ closeDeleteTaskModal, card }) => {
 					{card.title}’ task and its subtasks?
 					This action cannot be reversed.
 				</p>
-				<div className="flex flex-col gap-4">
+				<div className="flex flex-col gap-4 md:flex-row">
 					<button
-						className="font-bold bg-red text-white rounded-full p-2"
+						className="font-bold bg-red text-white rounded-full p-2 md:w-full"
 						onClick={() =>
 							handleDeleteTask(
 								card.id
@@ -42,7 +42,7 @@ const DeleteTaskModal = ({ closeDeleteTaskModal, card }) => {
 					<button
 						aria-label="Cancel deletion"
 						onClick={closeDeleteTaskModal}
-						className="font-bold dark:bg-white bg-secondary-light-gray text-primary-blue rounded-full p-2"
+						className="font-bold dark:bg-white bg-secondary-light-gray text-primary-blue rounded-full p-2 md:w-full"
 					>
 						Cancel
 					</button>

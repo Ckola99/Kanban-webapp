@@ -57,7 +57,7 @@ const CardDetailsModal = ({ card, onClose, openDeleteTaskModal, openEditTaskModa
 			onClick={handleModalClose}
 		>
 			<div
-				className="bg-white dark:bg-secondary-black  p-6 rounded-lg w-full flex flex-col gap-5"
+				className="bg-white dark:bg-secondary-black  p-6 rounded-lg w-full max-w-[480px] flex flex-col gap-5"
 				onClick={(e) => e.stopPropagation()}
 			>
 				<button

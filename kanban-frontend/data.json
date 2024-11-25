@@ -2,7 +2,6 @@
   "boards": [
     {
       "name": "Platform Launch",
-      "isActive": true,
       "columns": [
         {
           "name": "Todo",
@@ -335,7 +334,8 @@
             }
           ]
         }
-      ]
+      ],
+      "id": "57d8cf54-119e-4635-8efd-04cbf314edad"
     },
     {
       "name": "Marketing Plan",
@@ -442,7 +442,8 @@
           "name": "Done",
           "tasks": []
         }
-      ]
+      ],
+      "id": "d93f66ec-d631-4598-ad05-8aa93accbb3d"
     },
     {
       "name": "Roadmap",
@@ -501,7 +502,8 @@
           "name": "Later",
           "tasks": []
         }
-      ]
+      ],
+      "id": "6a30d944-23d6-4a80-a27d-63b63f508895"
     }
   ]
 }

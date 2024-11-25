@@ -3,9 +3,11 @@ import Header from "../components/Header";
 import Board from "../components/Board";
 import BoardsModal from "../components/BoardsModal";
 
+
+
 function App() {
 
-	const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const closeDropdown = () => setIsDropdownOpen(false);
 
 	useEffect(() => {
@@ -15,7 +17,7 @@ function App() {
 
 
 	return (
-		<div className={`font-plus-jakarta dark:bg-primary-black min-h-screen bg-primary-light-gray`}>
+		<div className={`relative font-plus-jakarta dark:bg-primary-black min-h-screen bg-primary-light-gray`}>
 			<Header setIsDropdownOpen={setIsDropdownOpen} isDropdownOpen={isDropdownOpen}/>
 			{isDropdownOpen && <BoardsModal isDropdownOpen={isDropdownOpen} close={closeDropdown}/>}
 			<Board />

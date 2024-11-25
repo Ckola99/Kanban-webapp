@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 import data from '../../../data.json'
 import { v4 as uuidv4 } from 'uuid';
 
@@ -7,6 +7,8 @@ const initialState = {
 	boards: data.boards,
 	currentBoardIndex: savedBoardIndex ? parseInt(savedBoardIndex, 10) : 0,
 	editBoardModal: false,
+	addBoardModal: false,
+	sidebar: true,
 }
 
 const boardsSlice = createSlice({
@@ -134,11 +136,11 @@ const boardsSlice = createSlice({
 		},
 
 		deleteBoard: (state, action) => {
-			const boardName = action.payload;
+			const { boardId } = action.payload;
 
-			const deletedBoardIndex = state.boards.findIndex(board => board.name === boardName)
+			const deletedBoardIndex = state.boards.findIndex(board => board.id === boardId)
 
-			state.boards = state.boards.filter(board => board.name !== boardName);
+			state.boards = state.boards.filter(board => board.id !== boardId);
 			if (deletedBoardIndex === state.currentBoardIndex) {
 				if (state.boards.length > 0) {
 					state.currentBoardIndex = 0;
@@ -150,35 +152,48 @@ const boardsSlice = createSlice({
 			}
 		},
 
-		addBoard: (state, action) => { },
+
+		addBoard: (state, action) => {
+			const { updatedData } = action.payload;
+			const newBoard = {
+				id: uuidv4(),
+				name: updatedData.name,
+				columns: updatedData.columns.map(column => ({
+					...column,
+					tasks: column.tasks || [], // Ensure each column has an empty tasks array
+				})),
+			};
+
+			state.boards.push(newBoard);
+		},
 
 		editBoard: (state, action) => {
-    const { boardName, updatedData } = action.payload;
+			const { boardId, updatedData } = action.payload;
 
-    // Find the index of the board by its name
-    const boardIndex = state.boards.findIndex(board => board.name === boardName);
+			// Find the index of the board by its name
+			const boardIndex = state.boards.findIndex(board => board.id === boardId);
 
-    if (boardIndex !== -1) {
-        // Update the board's details
-        const board = state.boards[boardIndex];
+			if (boardIndex !== -1) {
+				// Update the board's details
+				const board = state.boards[boardIndex];
 
-        // Update the board's name if provided
-        if (updatedData.name) {
-            board.name = updatedData.name;
-        }
+				// Update the board's name if provided
+				if (updatedData.name) {
+					board.name = updatedData.name;
+				}
 
-        // Update the board's columns if provided
-        if (updatedData.columns) {
-            board.columns = updatedData.columns.map(column => {
-                // Ensure every column has tasks (if not provided, default to an empty array)
-                return {
-                    ...column,
-                    tasks: column.tasks || [],
-                };
-            });
-        }
-    }
-},
+				// Update the board's columns if provided
+				if (updatedData.columns) {
+					board.columns = updatedData.columns.map(column => {
+						// Ensure every column has tasks (if not provided, default to an empty array)
+						return {
+							...column,
+							tasks: column.tasks || [],
+						};
+					});
+				}
+			}
+		},
 
 		editBoardModalOpen: (state) => {
 			state.editBoardModal = true;
@@ -188,10 +203,28 @@ const boardsSlice = createSlice({
 			state.editBoardModal = false;
 		},
 
+		addBoardModalOpen: (state) => {
+			state.addBoardModal = true;
+		},
+
+		addBoardModalClose: (state) => {
+			state.addBoardModal = false;
+		},
+
+		sidebarOpen: (state) => {
+			state.sidebar = true;
+		},
+
+		sidebarClose: (state) => {
+			state.sidebar = false;
+		},
+
 	},
 });
 
 export default boardsSlice.reducer;
 export const currentBoardSelector = (state) => state.boards.boards[state.boards.currentBoardIndex];
-export const { setCurrentBoard, updateCardStatus, updateSubtask, deleteTask, editTask, addNewTask, deleteBoard,  editBoardModalOpen, editBoardModalClose, editBoard } = boardsSlice.actions;
+export const { setCurrentBoard, updateCardStatus, updateSubtask, deleteTask, editTask, addNewTask, deleteBoard, editBoardModalOpen, editBoardModalClose, editBoard, addBoardModalOpen, addBoardModalClose, addBoard, sidebarOpen, sidebarClose } = boardsSlice.actions;
 export const selectEditBoardModalState = (state) => state.boards.editBoardModal;
+export const selectAddBoardModalState = (state) => state.boards.addBoardModal;
+export const selectSidebarState = (state) => state.boards.sidebar;

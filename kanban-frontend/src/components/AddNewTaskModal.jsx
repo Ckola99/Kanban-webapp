@@ -75,7 +75,7 @@ const AddNewTaskModal = ({ closeAddTaskModal }) => {
 
   	return (
 		<div onClick={closeAddTaskModal} className="fixed inset-0 bg-black bg-opacity-50 flex-center p-4 z-[60]">
-			<div className="bg-white dark:bg-secondary-black p-4 rounded-lg w-full" onClick={(e) => e.stopPropagation()} >
+			<div className="bg-white dark:bg-secondary-black p-4 rounded-lg w-full max-w-[480px]" onClick={(e) => e.stopPropagation()} >
 				<form
 					className="flex flex-col gap-4"
 					onSubmit={handleSubmit(onSubmit)}

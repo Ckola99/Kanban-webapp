@@ -3,11 +3,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm, useFieldArray } from "react-hook-form";
 import {
-	editBoardModalClose,
-	currentBoardSelector,
-	editBoard,
+	addBoardModalClose,
+	addBoard,
 } from "../features/boards/boardsSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // Validation Schema
 const validationSchema = yup.object({
@@ -25,24 +24,30 @@ const validationSchema = yup.object({
           .min(2, "Name must be at least 2 characters"),
       })
     )
-    .min(1, "You must have at least one column")
     .test("unique-column-names", "Columns require unique names", (columns) => {
       const names = columns.map((column) => column.name.toLowerCase().trim());
       return new Set(names).size === names.length; // Ensure no duplicates
     }),
 });
 
-const EditBoardModal = () => {
+const AddBoardModal = () => {
 
-  const currentBoard = useSelector(currentBoardSelector);
   const dispatch = useDispatch();
 
-  const { register, handleSubmit, control, formState: { errors } } = useForm({
-    resolver: yupResolver(validationSchema),
-    defaultValues: {
-      name: currentBoard.name,
-      columns: currentBoard.columns || [],
-    }
+  const {
+		register,
+		handleSubmit,
+		control,
+		formState: { errors },
+  } = useForm({
+		resolver: yupResolver(validationSchema),
+		defaultValues: {
+			name: "",
+			columns: [
+				{ name: "Todo", tasks: [] },
+				{ name: "Doing", tasks: [] }
+			],
+		},
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -50,31 +55,28 @@ const EditBoardModal = () => {
 		name: "columns",
   });
 
-  if (!currentBoard) {
-    return null;
-  }
 
 
 	const onSubmit = (data) => {
 		dispatch(
-			editBoard({
-				boardId: currentBoard.id,
+			addBoard({
 				updatedData: {
 					name: data.name,
 					columns: data.columns,
 				},
 			})
 		);
-		dispatch(editBoardModalClose());
+		dispatch(addBoardModalClose());
 	};
+
 
 	return (
 		<div
-			className="fixed inset-0 bg-black bg-opacity-50 flex-center p-4 z-[60]"
-			onClick={() => dispatch(editBoardModalClose())}
+			className="fixed inset-0 bg-black bg-opacity-50 flex-center p-4 z-[60] "
+			onClick={() => dispatch(addBoardModalClose())}
 		>
 			<div
-				className="bg-white dark:bg-secondary-black p-4 rounded-lg w-full  max-w-[480px]"
+				className="bg-white dark:bg-secondary-black p-4 rounded-lg w-full max-w-[480px]"
 				onClick={(e) => e.stopPropagation()}
 			>
 				<form
@@ -83,12 +85,12 @@ const EditBoardModal = () => {
 				>
 					<div className="flex justify-between">
 						<h1 className="large-heading dark:text-white">
-							Edit Board
+							Add New Board
 						</h1>
 						<button
 							onClick={() =>
 								dispatch(
-									editBoardModalClose()
+									addBoardModalClose()
 								)
 							}
 							type="button"
@@ -106,12 +108,14 @@ const EditBoardModal = () => {
 						<input
 							className={`body-large p-3 bg-inherit border rounded-md dark:text-white ${
 								errors.name
-									? "border-red"
+									? "border-red placeholder:text-red"
 									: "dark:border-secondary-gray"
 							}`}
 							type="text"
 							{...register("name")}
+							placeholder={ errors.name ? 'Board Name required' : 'e.g. Web Design'}
 						/>
+						{errors.name && <p className="text-xs bold text-red">{errors.name.message}</p>}
 					</div>
 
 					{/* Columns */}
@@ -199,4 +203,4 @@ const EditBoardModal = () => {
 	);
 };
 
-export default EditBoardModal;
+export default AddBoardModal;

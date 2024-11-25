@@ -9,6 +9,10 @@ const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 function addIdsToTasks(boards) {
 	boards.forEach(board => {
 		board.columns.forEach(column => {
+			if (!board.id) {
+			board.id = uuidv4();
+			}
+			
 			column.tasks.forEach(task => {
 				if (!task.id) {
 					task.id = uuidv4(); // Generate a unique ID for each task
