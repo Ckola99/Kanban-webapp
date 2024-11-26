@@ -40,8 +40,8 @@ const Columns = () => {
 					/>
 				);
 			})}
-			<div className="min-w-[280px] dark:bg-secondary-black bg-secondary-light-gray flex-center rounded-lg">
-				<button onClick={() => dispatch(editBoardModalOpen())} className="bg-primary-blue h-12 w-44 rounded-3xl med-heading text-white">
+			<div className="min-w-[280px] dark:bg-secondary-black bg-secondary-light-gray flex-center rounded-lg max-h-[1024px]">
+				<button onClick={() => dispatch(editBoardModalOpen())} className="hover:bg-secondary-blue bg-primary-blue h-12 w-44 rounded-3xl med-heading text-white">
 					+ Add New Column
 				</button>
 			</div>

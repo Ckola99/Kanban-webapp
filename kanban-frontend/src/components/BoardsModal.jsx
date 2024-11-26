@@ -39,7 +39,7 @@ const BoardsModal = ({ close }) => {
 				onClick={close}
 			>
 				<div
-					className="w-[264px] max-h-96 bg-white rounded-xl mt-[82px] py-4 flex flex-col dark:bg-primary-gray dark:shadow-xl dark:shadow-primary-blue/5 overflow-y-auto"
+					className="w-[264px] max-h-96 bg-white rounded-xl mt-[82px] py-4 flex flex-col dark:bg-primary-gray dark:shadow-xl dark:shadow-primary-blue/5 overflow-y-auto scrollbar-hide"
 					onClick={(e) => e.stopPropagation()}
 					role="document"
 				>

@@ -28,7 +28,7 @@ const DeleteTaskModal = ({ board, closeDeleteModal }) => {
 				</p>
 				<div className="flex flex-col gap-4 md:flex-row md:w-full">
 					<button
-						className="font-bold bg-red text-white rounded-full p-2 md:w-full"
+						className="font-bold bg-red text-white rounded-full p-2 md:w-full hover:bg-secondary-red"
 						onClick={() =>
 							handleDeleteBoard(
 								board

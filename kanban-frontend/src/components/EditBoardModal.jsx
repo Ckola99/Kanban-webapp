@@ -120,55 +120,76 @@ const EditBoardModal = () => {
 							Board Columns
 						</label>
 						{fields.map((field, index) => (
+							<div
+								key={field.id}
+								className="flex gap-3"
+							>
+								<input
+									placeholder={
+										errors
+											.columns?.[
+											index
+										]
+											?.name
+											? errors
+													.columns[
+													index
+											  ]
+													.name
+													.message
+											: `e.g. column ${
+													index +
+													1
+											  }`
+									}
+									className={`w-full body-large p-3 bg-inherit  rounded-md dark:text-white border ${
+										errors
+											.columns?.[
+											index
+										]
+											?.name
+											? "dark:border-red border-red placeholder:text-red"
+											: " border"
+									} dark:border-secondary-gray`}
+									type="text"
+									{...register(
+										`columns.${index}.name`
+									)}
+								/>
+								<button
+									type="button"
+									className="ml-1"
+									onClick={() =>
+										remove(
+											index
+										)
+									}
+								>
+									<svg
+										width="15"
+										height="15"
+										xmlns="http://www.w3.org/2000/svg"
+										className="mr-1 hover:fill-red"
+									>
+										<g fill="#828FA3">
+											<path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z" />
+											<path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z" />
+										</g>
+									</svg>
+								</button>
+							</div>
+						))}
 
-		<div key={field.id} className="flex gap-3">
-			<input
-				placeholder={
-					errors.columns?.[index]?.name
-						? errors.columns[index].name
-								.message
-						: `e.g. column ${index + 1}`
-				}
-				className={`w-full body-large p-3 bg-inherit  rounded-md dark:text-white border ${
-					errors.columns?.[index]?.name
-						? "dark:border-red border-red placeholder:text-red"
-						: " border"
-				} dark:border-secondary-gray`}
-				type="text"
-				{...register(`columns.${index}.name`)}
-			/>
-			<button
-				type="button"
-				className="ml-1"
-				onClick={() => remove(index)}
-			>
-				<svg
-					width="15"
-					height="15"
-					xmlns="http://www.w3.org/2000/svg"
-					className="mr-1 hover:fill-red"
-				>
-					<g fill="#828FA3">
-						<path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z" />
-						<path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z" />
-					</g>
-				</svg>
-			</button>
-		</div>
-  ))}
-
-            {errors.columns
-									?.root && (
-									<p className="text-red text-xs">
-										{
-											errors
-												.columns
-												.root
-												.message
-										}
-									</p>
-								)}
-
+						{errors.columns?.root && (
+							<p className="text-red text-xs">
+								{
+									errors
+										.columns
+										.root
+										.message
+								}
+							</p>
+						)}
 
 						<button
 							onClick={() =>
@@ -185,14 +206,14 @@ const EditBoardModal = () => {
 					</div>
 
 					{/* Buttons */}
-					<div className="dark:bg-primary-blue flex-center p-2 rounded-full bg-primary-blue">
+
 						<button
-							className="font-bold text-white text-[13px]"
+							className="font-bold text-white text-[13px] bg-primary-blue flex-center p-2 rounded-full hover:bg-secondary-blue hover:cursor-pointer"
 							type="submit"
 						>
 							Save Changes
 						</button>
-					</div>
+
 				</form>
 			</div>
 		</div>

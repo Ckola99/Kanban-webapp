@@ -17,9 +17,19 @@ function App() {
 
 
 	return (
-		<div className={`relative font-plus-jakarta dark:bg-primary-black min-h-screen bg-primary-light-gray`}>
-			<Header setIsDropdownOpen={setIsDropdownOpen} isDropdownOpen={isDropdownOpen}/>
-			{isDropdownOpen && <BoardsModal isDropdownOpen={isDropdownOpen} close={closeDropdown}/>}
+		<div
+			className={`relative font-plus-jakarta dark:bg-primary-black min-h-screen bg-primary-light-gray `}
+		>
+			<Header
+				setIsDropdownOpen={setIsDropdownOpen}
+				isDropdownOpen={isDropdownOpen}
+			/>
+			{isDropdownOpen && (
+				<BoardsModal
+					isDropdownOpen={isDropdownOpen}
+					close={closeDropdown}
+				/>
+			)}
 			<Board />
 		</div>
 	);

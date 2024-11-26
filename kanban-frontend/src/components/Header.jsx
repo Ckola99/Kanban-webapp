@@ -34,7 +34,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 	const noBoards = !currentBoard;
 	const boards = useSelector((state) => state.boards.boards);
 	const sidebarIsOpen = useSelector(selectSidebarState);
-	const theme = useSelector((state) => state.boards.theme)
+	const theme = useSelector((state) => state.theme.isDarkMode)
 
 	const handleBoardSelection = (boardId) => {
 		const boardIndex = boards.findIndex(
@@ -55,6 +55,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 
 
 	console.log(sidebarIsOpen)
+	console.log(theme)
 
 	return (
 		<div className="h-16 w-full dark:bg-primary-gray flex px-4 justify-between bg-white fixed left-0 right-0 top-0 z-50">
@@ -66,9 +67,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 			>
 				<img
 					src={
-						theme === "dark"
-							? logoDark
-							: logoLight
+						theme ? logoLight : logoDark
 					}
 					alt="company logo"
 					className="max-w-[152px] h-[25px] m-5"
@@ -242,7 +241,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 						noBoards
 							? "bg-opacity-25 cursor-not-allowed"
 							: "bg-opacity-100"
-					} w-12 h-8 flex-center rounded-2xl mr-4 md:w-[164px]`}
+					} w-12 h-8 flex-center rounded-2xl mr-4 md:w-[164px] hover:bg-secondary-blue`}
 					disabled={noBoards}
 				>
 					<img

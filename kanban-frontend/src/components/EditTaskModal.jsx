@@ -71,7 +71,7 @@ const EditTaskModal = ({ taskCard, closeEditTaskModal }) => {
   	return (
 		<div
 			onClick={closeEditTaskModal}
-			className="fixed inset-0 bg-black bg-opacity-50 flex-center p-4 z-[60]"
+			className="fixed inset-0 bg-black bg-opacity-50 flex-center p-4 z-[60] "
 		>
 			<div
 				className="bg-white dark:bg-secondary-black p-4 rounded-lg w-full max-w-[480px]"
@@ -102,9 +102,11 @@ const EditTaskModal = ({ taskCard, closeEditTaskModal }) => {
 							Title
 						</label>
 						<input
-							 className={`body-large p-3 bg-inherit border rounded-md dark:text-white ${
-                						errors.title ? "border-red" : "dark:border-secondary-gray"
-              						}`}
+							className={`body-large p-3 bg-inherit border rounded-md dark:text-white ${
+								errors.title
+									? "border-red"
+									: "dark:border-secondary-gray"
+							}`}
 							type="text"
 							{...register("title")}
 						/>
@@ -241,14 +243,13 @@ const EditTaskModal = ({ taskCard, closeEditTaskModal }) => {
 					</div>
 
 					{/* Buttons */}
-					<div className="dark:bg-primary-blue flex-center p-2 rounded-full bg-primary-blue">
-						<button
-							className="font-bold text-white text-[13px]"
-							type="submit"
-						>
-							Save Changes
-						</button>
-					</div>
+
+					<button
+						className="font-bold text-white text-[13px] flex-center p-2 rounded-full bg-primary-blue hover:bg-secondary-blue"
+						type="submit"
+					>
+						Save Changes
+					</button>
 				</form>
 			</div>
 		</div>

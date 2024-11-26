@@ -29,7 +29,7 @@ const DeleteTaskModal = ({ closeDeleteTaskModal, card }) => {
 				</p>
 				<div className="flex flex-col gap-4 md:flex-row">
 					<button
-						className="font-bold bg-red text-white rounded-full p-2 md:w-full"
+						className="font-bold bg-red text-white rounded-full p-2 md:w-full hover:bg-secondary-red"
 						onClick={() =>
 							handleDeleteTask(
 								card.id

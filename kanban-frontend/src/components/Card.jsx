@@ -19,7 +19,7 @@ const Card = ({ taskId }) => {
 	return (
 		<>
 			<div
-				className="bg-white dark:bg-secondary-black dark:text-white w-[280px] h-auto rounded-lg p-4 shadow-md"
+				className="bg-white dark:bg-secondary-black dark:text-white w-[280px] h-auto rounded-lg p-4 shadow-md dark:shadow-md hover:text-primary-blue hover:cursor-pointer dark:hover:text-primary-blue"
 				onClick={() => setModalOpen(true)}
 			>
 				<h2 className="med-heading mb-2">

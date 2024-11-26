@@ -21,7 +21,7 @@ const Board = () => {
   // Handle if no current board is available
   if (!currentBoard) {
     return (
-		<div className={`min-h-[calc(100vh-64px)] flex flex-col justify-center items-center p-5 ${sidebarIsOpen && 'ml-[261px]'}`}>
+		<div className={`min-h-[calc(100vh-64px)] flex flex-col justify-center items-center p-5 ${sidebarIsOpen && 'ml-[261px]'} scrollbar-hidden`}>
 			<p className="text-tertiary-gray large-heading mb-5 text-center">
 				This account has no boards. Create a new board
 				to get started.
@@ -49,9 +49,9 @@ const Board = () => {
   }
 
   const boardClass =
-    currentBoard.columns.length === 0
-      ? "flex justify-center items-center px-6 relative"
-      : "min-h-[calc(100vh-64px)] relative";
+		currentBoard.columns.length === 0
+			? "flex justify-center items-center px-6 relative scrollbar-hide"
+			: "min-h-[calc(100vh-64px)] relative scrollbar-hide";
 
   return (
 		<div className={boardClass}>
@@ -78,7 +78,7 @@ const Board = () => {
 			)}
 			{openBoardEditModal && <EditBoardModal />}
 			{openBoardAddModal && <AddBoardModal />}
-			{!sidebarIsOpen && (<button onClick={() => dispatch(sidebarOpen())} className="w-[56px] h-[48px] fixed bg-primary-blue bottom-0 left-0 z-index-[66] items-center justify-center rounded-l rounded-full mb-10 hidden md:flex">
+			{!sidebarIsOpen && (<button onClick={() => dispatch(sidebarOpen())} className="hover:bg-secondary-blue w-[56px] h-[48px] fixed bg-primary-blue bottom-0 left-0 z-index-[66] items-center justify-center rounded-l rounded-full mb-10 hidden md:flex">
 				<img src={show} alt="show visibility icon" />
 			</button>)}
 		</div>

@@ -12,7 +12,7 @@ const Subtasks = ({ card, handleSubtaskToggle }) => {
 						sub.isCompleted
 							? "  bg-secondary-blue"
 							: " bg-secondary-light-gray "
-					} p-2 rounded  dark:bg-primary-black dark:bg-opacity-50 `}
+					} p-2 rounded  dark:bg-primary-black dark:bg-opacity-50 dark:hover:bg-secondary-blue`}
 				>
 					<label
 						className={` ${
@@ -22,7 +22,7 @@ const Subtasks = ({ card, handleSubtaskToggle }) => {
 						} font-bold text-xs flex items-center gap-3 `}
 					>
 						<input
-							className="dark:bg-primary-blue checked:bg-primary-blue dark:checked:bg-primary-blue"
+							className="dark:bg-primary-blue checked:primary-blue dark:checked:bg-primary-blue "
 							type="checkbox"
 							name="subtasks"
 							value={sub.title}
