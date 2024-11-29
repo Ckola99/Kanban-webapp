@@ -1,4 +1,4 @@
-import { createSlice, createSelector } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import data from '../../../data.json'
 import { v4 as uuidv4 } from 'uuid';
 
@@ -116,6 +116,7 @@ const boardsSlice = createSlice({
 
 						task.subtasks = updatedData.subtasks;
 					}
+
 				}
 			}
 		},
@@ -219,12 +220,54 @@ const boardsSlice = createSlice({
 			state.sidebar = false;
 		},
 
+		updateColumnTasks: (state, action) => {
+			const { taskId, sourceColumn, destinationColumn } = action.payload;
+
+			// Find source and destination column indices
+			const sourceColumnIndex = state.boards[state.currentBoardIndex].columns.findIndex(
+				column => column.name === sourceColumn
+			);
+
+			const destColumnIndex = state.boards[state.currentBoardIndex].columns.findIndex(
+				column => column.name === destinationColumn
+			);
+
+			// Validate indices
+			if (sourceColumnIndex === -1 || destColumnIndex === -1) {
+				console.error("Invalid source or destination column");
+				return;
+			}
+
+			// Locate the task
+			const task = state.boards[state.currentBoardIndex].columns[sourceColumnIndex]?.tasks.find(
+				task => task.id === taskId
+			);
+
+			if (!task) {
+				console.error("Task not found");
+				return;
+			}
+
+			// Remove task from source column
+			state.boards[state.currentBoardIndex].columns[sourceColumnIndex].tasks =
+				state.boards[state.currentBoardIndex].columns[sourceColumnIndex].tasks.filter(
+					task => task.id !== taskId
+				);
+
+			// Add task to destination column
+			state.boards[state.currentBoardIndex].columns[destColumnIndex].tasks.push(task);
+
+			// Optional: Update task metadata
+			task.status = destinationColumn; // or other metadata changes
+		}
+
+
 	},
 });
 
 export default boardsSlice.reducer;
 export const currentBoardSelector = (state) => state.boards.boards[state.boards.currentBoardIndex];
-export const { setCurrentBoard, updateCardStatus, updateSubtask, deleteTask, editTask, addNewTask, deleteBoard, editBoardModalOpen, editBoardModalClose, editBoard, addBoardModalOpen, addBoardModalClose, addBoard, sidebarOpen, sidebarClose } = boardsSlice.actions;
+export const { updateColumnTasks, setCurrentBoard, updateCardStatus, updateSubtask, deleteTask, editTask, addNewTask, deleteBoard, editBoardModalOpen, editBoardModalClose, editBoard, addBoardModalOpen, addBoardModalClose, addBoard, sidebarOpen, sidebarClose } = boardsSlice.actions;
 export const selectEditBoardModalState = (state) => state.boards.editBoardModal;
 export const selectAddBoardModalState = (state) => state.boards.addBoardModal;
 export const selectSidebarState = (state) => state.boards.sidebar;

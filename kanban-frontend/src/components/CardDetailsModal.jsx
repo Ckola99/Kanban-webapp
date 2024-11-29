@@ -12,8 +12,6 @@ import Subtasks from "./Subtasks"
 
 
 const CardDetailsModal = ({ card, onClose, openDeleteTaskModal, openEditTaskModal }) => {
-	console.log("Card in modal", card);
-
 	const currentBoard = useSelector(currentBoardSelector);
 	const dispatch = useDispatch();
 

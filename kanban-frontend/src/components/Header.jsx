@@ -53,22 +53,18 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 		close()
 	}
 
-
-	console.log(sidebarIsOpen)
-	console.log(theme)
-
 	return (
 		<div className="h-16 w-full dark:bg-primary-gray flex px-4 justify-between bg-white fixed left-0 right-0 top-0 z-50">
 			<div
 				className={`h-full
 				md:flex hidden md:flex-col bg-white dark:bg-primary-gray md:-mx-4 border-r dark:border-secondary-gray ${
-					sidebarIsOpen ? "w-[261px]" : "w-[250px]"
-				}`}
+					sidebarIsOpen
+						? "w-[261px]"
+						: "w-[250px]"
+				} transition-all duration-300 ease-in-out`}
 			>
 				<img
-					src={
-						theme ? logoLight : logoDark
-					}
+					src={theme ? logoLight : logoDark}
 					alt="company logo"
 					className="max-w-[152px] h-[25px] m-5"
 				/>
@@ -138,7 +134,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 								)}
 							<li>
 								<button
-									className={`w-[240px] h-12 flex items-center pl-5 text-tertiary-gray`}
+									className={`med-heading text-primary-blue w-[240px] h-12 flex items-center pl-5 dark:hover:text-white group`}
 									onClick={
 										handleAddBoard
 									}
@@ -147,17 +143,17 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 										width="16"
 										height="16"
 										xmlns="http://www.w3.org/2000/svg"
-										className="fill-primary-blue"
+										className="fill-primary-blue mr-3 group-hover:fill-black dark:group-hover:fill-white"
 										aria-hidden="true"
 									>
 										<path d="M0 2.889A2.889 2.889 0 0 1 2.889 0H13.11A2.889 2.889 0 0 1 16 2.889V13.11A2.888 2.888 0 0 1 13.111 16H2.89A2.889 2.889 0 0 1 0 13.111V2.89Zm1.333 5.555v4.667c0 .859.697 1.556 1.556 1.556h6.889V8.444H1.333Zm8.445-1.333V1.333h-6.89A1.556 1.556 0 0 0 1.334 2.89V7.11h8.445Zm4.889-1.333H11.11v4.444h3.556V5.778Zm0 5.778H11.11v3.11h2a1.556 1.556 0 0 0 1.556-1.555v-1.555Zm0-7.112V2.89a1.555 1.555 0 0 0-1.556-1.556h-2v3.111h3.556Z" />
 									</svg>
-									<p className="ml-3 med-heading text-primary-blue dark:hover:text-white hover:text-[#000000]">
+									<span className="group-hover:text-black dark:group-hover:text-white">
 										+
 										Create
 										New
 										Board
-									</p>
+									</span>
 								</button>
 							</li>
 						</ul>

@@ -12,7 +12,7 @@ const Subtasks = ({ card, handleSubtaskToggle }) => {
 						sub.isCompleted
 							? "  bg-secondary-blue"
 							: " bg-secondary-light-gray "
-					} p-2 rounded  dark:bg-primary-black dark:bg-opacity-50 dark:hover:bg-secondary-blue`}
+					} p-2 rounded  dark:bg-primary-black dark:bg-opacity-50 dark:hover:bg-secondary-blue hover:bg-secondary-blue`}
 				>
 					<label
 						className={` ${

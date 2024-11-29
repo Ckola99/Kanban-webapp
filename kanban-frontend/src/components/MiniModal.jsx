@@ -16,13 +16,15 @@ const MiniModal = ({ closeCard, openDeleteTaskModal, openEditTaskModal }) => {
 
   return (
 		<div className="absolute z-[61] -right-10 top-[68px]">
-			<div className=" dark:bg-primary-black bg-white h-24 w-[192px] flex flex-col justify-between p-4 rounded-lg ">
+			<div className=" dark:bg-primary-black bg-white w-[192px] flex flex-col justify-between p-4 rounded-lg max-h-[200px] gap-2">
+				<button className="text-tertiary-gray text-left large-body">Work on Task</button>
 				<button onClick={handleEditTask} className="text-tertiary-gray text-left large-body">
 					Edit Task
 				</button>
 				<button onClick={handleDeleteTask} className="text-red text-left large-body items-center">
 					Delete Task
 				</button>
+
 			</div>
 		</div>
   );
