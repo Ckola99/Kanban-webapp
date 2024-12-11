@@ -11,7 +11,6 @@ import AddBoardModal from "./AddBoardModal";
 import show from "../assets/icon-show-sidebar.svg";
 
 
-
 const Board = () => {
   const currentBoard = useSelector(currentBoardSelector);
   const openBoardEditModal = useSelector(selectEditBoardModalState);

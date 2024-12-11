@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import themeReducer from '../features/theme/themeSlice'
 import boardsSliceReducer from '../features/boards/boardsSlice'
-import promodoroSliceReducer from '../features/promodoro/promodoroSlice'
+import pomodoroSliceReducer from '../features/pomodoro/pomodoroSlice'
 
 const store = configureStore({
 	reducer: {
 		theme: themeReducer,
 		boards: boardsSliceReducer,
-		promodoro: promodoroSliceReducer
+		pomodoro: pomodoroSliceReducer
 	},
 });
 

@@ -6,12 +6,18 @@ import { currentBoardSelector } from "../features/boards/boardsSlice";
 import DeleteTaskModal from "./DeleteTaskModal";
 import EditTaskModal from "./EditTaskModal";
 import { useDraggable } from "@dnd-kit/core";
+import { selectPomodoroState } from "../features/pomodoro/pomodoroSlice";
+import PomodoroBoard from "./PomodoroBoard";
+
+
 
 const Card = ({ taskId }) => {
 	const [isModalOpen, setModalOpen] = useState(false);
 	const [isDeleteTaskModalOpen, setDeleteTaskModalOpen] = useState(false);
 	const [isEditTaskModalOpen, setEditTaskModalOpen] = useState(false);
 	const currentBoard = useSelector(currentBoardSelector);
+  	const { workBoard } = useSelector(selectPomodoroState);
+
 
 	const task = currentBoard.columns
 		.flatMap((column) => column.tasks)
@@ -100,6 +106,8 @@ const Card = ({ taskId }) => {
 					}
 				/>
 			)}
+			{workBoard && <PomodoroBoard/>}
+
 		</>
 	);
 };
