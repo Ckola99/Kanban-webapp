@@ -22,7 +22,7 @@ const Board = () => {
   // Handle if no current board is available
   if (!currentBoard) {
     return (
-		<div className={`min-h-[calc(100vh-64px)] flex flex-col justify-center items-center p-5 ${sidebarIsOpen && 'ml-[261px]'} scrollbar-hidden`}>
+		<div className={`min-h-[calc(100vh-64px)] flex flex-col justify-center items-center p-5 ${sidebarIsOpen && 'ml-[261px]'}`}>
 			<p className="text-tertiary-gray large-heading mb-5 text-center">
 				This account has no boards. Create a new board
 				to get started.
@@ -51,8 +51,8 @@ const Board = () => {
 
   const boardClass =
 		currentBoard.columns.length === 0
-			? "flex justify-center items-center px-6 relative scrollbar-hide"
-			: "min-h-[calc(100vh-64px)] relative scrollbar-hide";
+			? "flex justify-center items-center px-6 relative "
+		  : "min-h-[calc(100vh-64px)] relative ";
 
   return (
 			<div className={boardClass}>

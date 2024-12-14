@@ -68,7 +68,7 @@ const Columns = () => {
 
 	return (
 		<div
-			className={`relative mt-16 flex overflow-x-scroll p-6 gap-6 ${
+			className={`relative mt-16 flex overflow-scroll p-6 gap-6 no-scrollbar no-scrollbar::-webkit-scrollbar ${
 				sidebarIsOpen && "md:ml-[261px]"
 			} min-h-[100vh]`}
 		>

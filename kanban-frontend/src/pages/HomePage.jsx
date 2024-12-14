@@ -15,7 +15,7 @@ const HomePage = () => {
 	return (
 
 		<div
-			className={`relative font-plus-jakarta dark:bg-primary-black min-h-screen bg-primary-light-gray `}
+			className={`relative font-plus-jakarta dark:bg-primary-black min-h-screen bg-primary-light-gray scrollbar-thin scrollbar-webkit`}
 		>
 			<Header
 				setIsDropdownOpen={setIsDropdownOpen}

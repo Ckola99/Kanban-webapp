@@ -13,14 +13,14 @@ const Subtasks = ({ card, handleSubtaskToggle }) => {
 						sub.isCompleted
 							? "  bg-secondary-blue"
 							: " bg-secondary-light-gray "
-					} p-2 rounded  dark:bg-primary-black dark:bg-opacity-50 dark:hover:bg-secondary-blue hover:bg-secondary-blue`}
+					} p-2 rounded  dark:bg-primary-black dark:bg-opacity-50 hover:cursor-pointer dark:hover:bg-secondary-blue hover:bg-secondary-blue`}
 				>
 					<label
 						className={` ${
 							sub.isCompleted
 								? "line-through dark:text-primary-gray text-secondary-gray"
 								: "dark:text-white"
-						} font-bold text-xs flex items-center gap-3 `}
+						} font-bold text-xs flex items-center gap-3 hover:cursor-pointer`}
 					>
 						<input
 							className="dark:bg-primary-blue checked:primary-blue dark:checked:bg-primary-blue "

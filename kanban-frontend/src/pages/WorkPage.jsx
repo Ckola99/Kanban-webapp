@@ -1,5 +1,5 @@
 // Import necessary libraries
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
 	selectPomodoroState,
@@ -15,28 +15,14 @@ import PlayButton from '../components/PlayButton'
 import PauseButton from '../components/PauseButton'
 import ResetButton from '../components/ResetButton'
 import SettingsButton from '../components/SettingsButton'
-import { useLocation } from "react-router-dom";
 import PomodoroClock from '../components/PomodoroClock'
-import Subtasks from '../components/Subtasks'
-import {
-	updateSubtask,
-	currentBoardSelector
-} from "../features/boards/boardsSlice";
+import WorkTasks from '../components/WorkTasks'
+
+
 
 const WorkPage = () => {
-  	const currentBoard = useSelector(currentBoardSelector);
 
 	const dispatch = useDispatch();
-
-	console.log(currentBoard)
-
-	const incompleteTasks = currentBoard.columns.flatMap(column =>
-		column.tasks.filter(task =>
-			task.subtasks.some(subtask => subtask.isCompleted !== true)
-		)
-	);
-
-	console.log(incompleteTasks)
 
 	const {
 		activeSession,
@@ -100,29 +86,12 @@ const WorkPage = () => {
 		}
 	}, [timerValue, activeSession, completedSessions, dispatch]);
 
-	const [selectedTaskId, setSelectedTaskId] = useState(null)
-
-	const handleTaskClick = (id) => {
-		setSelectedTaskId(selectedTaskId === id ? null : id)
-	}
-
-	const handleSubtaskToggle = (subtaskId, isCompleted) => {
-		console.log(isCompleted)
-		console.log(subtaskId)
-
-		dispatch(
-			updateSubtask({
-				subtaskId,
-				isCompleted: isCompleted,
-			})
-		);
-	};
 
 	return (
 		<div className="relative font-plus-jakarta dark:bg-primary-black min-h-screen bg-primary-light-gray grid place-content-center ">
 			<h1 className=" dark:text-white text-primary-blue text-center extra-large-heading mb-2">Work Mode</h1>
 			<div className="max-w-[90%] max-h-[90%] grid grid-cols-2 gap-2 mx-auto">
-				<div className="dark:bg-secondary-black bg-white flex flex-col items-center p-5 rounded-lg relative ">
+				<div className="dark:bg-secondary-black bg-white flex flex-col items-center p-5 rounded-lg relative min-w-[350px]">
 
 					<h1 className="text-white mb-2">{activeSession === 'work' ? `Promodoro ${completedSessions + 1}` : activeSession === 'shortBreak' ? ' Short Break' : 'Long Break'}</h1>
 
@@ -148,42 +117,7 @@ const WorkPage = () => {
 				</div>
 
 				{/* Tasks */}
-				<div className={`grid grid-cols-2 gap-2 ${selectedTaskId && 'overflow-scroll'}`}>
-					{incompleteTasks.map(task => {
-
-						const selectedTask = incompleteTasks.find(task => task.id === selectedTaskId)
-						console.log('selected task: ', selectedTask)
-						return (
-
-
-						<div key={task.id} onClick={() => handleTaskClick(task.id)} className={` transition-all duration-300 ease-in-out ${selectedTaskId === task.id ? 'row-span-2 z-10 relative' : 'col-span-1'} bg-white dark:bg-secondary-black dark:text-white rounded-lg p-4 shadow-md dark:shadow-md hover:text-primary-blue hover:cursor-pointer dark:hover:text-primary-blue`}>
-							<h2 className="med-heading mb-2">
-								{task.title}
-							</h2>
-							{selectedTaskId === task.id ? (<form onClick={(e) => e.stopPropagation()} >
-								<h2 className="font-bold text-tertiary-gray text-[12px] mb-3">
-									Subtasks (
-									{
-										task.subtasks.filter(
-											(sub) =>
-												sub.isCompleted
-										).length
-									}{" "}
-									of {task.subtasks.length})
-								</h2>
-								<Subtasks
-									handleSubtaskToggle={handleSubtaskToggle}
-									card={task}
-								/>
-							</form>) : (<p className="text-tertiary-gray body-med">
-								{
-									task.subtasks.filter((sub) => sub.isCompleted).length
-								}{" "}
-								of {task.subtasks.length}{" "}subtasks
-							</p>)}
-						</div>
-					)})}
-				</div>
+				<WorkTasks />
 
 			</div>
 		</div>
