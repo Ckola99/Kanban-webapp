@@ -20,11 +20,12 @@ import PomodoroClock from '../components/PomodoroClock'
 import Subtasks from '../components/Subtasks'
 import {
 	updateSubtask,
+	currentBoardSelector
 } from "../features/boards/boardsSlice";
 
 const WorkPage = () => {
-	const location = useLocation();
-	const currentBoard = location.state?.currentBoard;
+  	const currentBoard = useSelector(currentBoardSelector);
+
 	const dispatch = useDispatch();
 
 	console.log(currentBoard)
@@ -148,12 +149,18 @@ const WorkPage = () => {
 
 				{/* Tasks */}
 				<div className={`grid grid-cols-2 gap-2 ${selectedTaskId && 'overflow-scroll'}`}>
-					{incompleteTasks.map(task => (
+					{incompleteTasks.map(task => {
+
+						const selectedTask = incompleteTasks.find(task => task.id === selectedTaskId)
+						console.log('selected task: ', selectedTask)
+						return (
+
+
 						<div key={task.id} onClick={() => handleTaskClick(task.id)} className={` transition-all duration-300 ease-in-out ${selectedTaskId === task.id ? 'row-span-2 z-10 relative' : 'col-span-1'} bg-white dark:bg-secondary-black dark:text-white rounded-lg p-4 shadow-md dark:shadow-md hover:text-primary-blue hover:cursor-pointer dark:hover:text-primary-blue`}>
 							<h2 className="med-heading mb-2">
 								{task.title}
 							</h2>
-							{selectedTaskId === task.id ? (<form onClick={(e) => e.stopPropagation()}>
+							{selectedTaskId === task.id ? (<form onClick={(e) => e.stopPropagation()} >
 								<h2 className="font-bold text-tertiary-gray text-[12px] mb-3">
 									Subtasks (
 									{
@@ -170,12 +177,12 @@ const WorkPage = () => {
 								/>
 							</form>) : (<p className="text-tertiary-gray body-med">
 								{
-									task.subtasks.filter((sub) => sub.isComplete).length
+									task.subtasks.filter((sub) => sub.isCompleted).length
 								}{" "}
 								of {task.subtasks.length}{" "}subtasks
 							</p>)}
 						</div>
-					))}
+					)})}
 				</div>
 
 			</div>

@@ -42,6 +42,7 @@ const boardsSlice = createSlice({
 		},
 
 		updateSubtask: (state, action) => {
+
 			const { subtaskId, isCompleted } = action.payload;
 
 			const task = state.boards[state.currentBoardIndex].columns
@@ -53,7 +54,6 @@ const boardsSlice = createSlice({
 				if (subtask) {
 					subtask.isCompleted = isCompleted;
 				}
-
 			}
 		},
 

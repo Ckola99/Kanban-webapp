@@ -228,7 +228,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 			{/* right side */}
 			<div className="flex items-center">
 				<button
-					onClick={() => navigate('/workpage', { state: { currentBoard }})}
+					onClick={() => navigate('/workpage')}
 					className={` bg-primary-blue ${
 						noBoards
 							? "bg-opacity-25 cursor-not-allowed"
@@ -269,6 +269,8 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 					aria-label="Menu"
 					onClick={() =>
 						setIsOpen((prev) => !prev)
+
+
 					}
 					disabled={noBoards}
 				>
@@ -292,7 +294,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 			)}
 			{isOpen && (
 				<HamburgerDropdown
-					closeHamburger={() => setIsOpen(false)}
+					closeHamburger={() =>{ setIsOpen(false) }}
 					openDeleteModal={() =>
 						setDeleteBoard(true)
 					}

@@ -6,6 +6,7 @@ const Subtasks = ({ card, handleSubtaskToggle }) => {
 	return (
 		<div className="flex flex-col gap-2">
 			{card.subtasks.map((sub) => (
+
 				<div
 					key={sub.id}
 					className={` ${
