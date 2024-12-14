@@ -14,6 +14,7 @@ import AddNewTaskModal from './AddNewTaskModal';
 import HamburgerDropdown from './HamburgerDropdown';
 import DeleteBoard from './DeleteBoard';
 import DarkModeToggle from "./DarkModeToggle";
+import { useNavigate } from "react-router-dom"
 
 
 
@@ -22,6 +23,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isDeleteBoard, setDeleteBoard] = useState(false);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 
 
@@ -221,8 +223,20 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 				</div>
 			</div>
 
+
+
 			{/* right side */}
 			<div className="flex items-center">
+				<button
+					onClick={() => navigate('/workpage', { state: { currentBoard }})}
+					className={` bg-primary-blue ${
+						noBoards
+							? "bg-opacity-25 cursor-not-allowed"
+							: "bg-opacity-100"
+					} max-sm:hidden md:flex flex-center rounded-2xl mr-4 h-8 w-[164px] hover:bg-secondary-blue font-bold text-white`}
+					disabled={noBoards} >
+						Work on tasks
+				</button>
 				<button
 					onClick={
 						currentBoard?.columns.length > 0

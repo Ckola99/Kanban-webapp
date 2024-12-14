@@ -2,13 +2,17 @@ import React from "react";
 import useDarkMode from "../hooks/useDarkMode";
 import lightIcon from "../assets/icon-light-theme.svg";
 import darkIcon from "../assets/icon-dark-theme.svg";
+import { useLocation } from "react-router-dom";
 
 const DarkModeToggle = () => {
   const [isDarkMode, toggleDarkMode] = useDarkMode();
+  const location = useLocation();
+
+  const isWorkPage = location.pathname.includes('workpage');
 
   return (
     <div
-      className="w-[235px] h-12 mx-auto rounded-lg dark:bg-secondary-black bg-secondary-light-gray flex items-center"
+      className={`w-[235px] h-12 mx-auto rounded-lg bg-secondary-light-gray flex items-center ${isWorkPage && isDarkMode ? 'dark:bg-gray-700': 'dark:bg-secondary-black' }`}
     >
       <div className="flex items-center justify-center w-full gap-5">
         {/* Light mode icon */}

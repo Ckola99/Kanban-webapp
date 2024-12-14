@@ -1,36 +1,16 @@
-import React, { useState, useEffect } from "react";
-import Header from "../components/Header";
-import Board from "../components/Board";
-import BoardsModal from "../components/BoardsModal";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from '../pages/HomePage';
+import WorkPage from '../pages/WorkPage';
 
 function App() {
-	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-	const closeDropdown = () => setIsDropdownOpen(false);
-
-	useEffect(() => {
-		const savedTheme = localStorage.getItem("theme") || "light";
-		document.body.classList.toggle("dark", savedTheme === "dark");
-	}, []);
 
 	return (
-
-			<div
-				className={`relative font-plus-jakarta dark:bg-primary-black min-h-screen bg-primary-light-gray `}
-			>
-				<Header
-					setIsDropdownOpen={setIsDropdownOpen}
-					isDropdownOpen={isDropdownOpen}
-				/>
-				{isDropdownOpen && (
-					<BoardsModal
-						isDropdownOpen={isDropdownOpen}
-						close={closeDropdown}
-					/>
-				)}
-
-				<Board />
-				
-			</div>
+		<Router>
+			<Routes>
+				<Route index path="/" element={<HomePage />} />
+				<Route path="/workpage" element={<WorkPage />}/>
+			</Routes>
+		</Router>
 	);
 }
 

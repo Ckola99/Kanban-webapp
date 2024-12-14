@@ -40,9 +40,9 @@ const CardDetailsModal = ({ card, onClose, openDeleteTaskModal, openEditTaskModa
 	};
 
 	const handleSubtaskToggle = (subtaskId, isCompleted) => {
+		console.log(isCompleted)
 		dispatch(
 			updateSubtask({
-				cardId: card.id,
 				subtaskId,
 				isCompleted: isCompleted,
 			})
@@ -80,7 +80,7 @@ const CardDetailsModal = ({ card, onClose, openDeleteTaskModal, openEditTaskModa
 							}
 						/>
 					</button>
-					{miniModalOpen && <MiniModal closeCard = {handleModalClose} openDeleteTaskModal={openDeleteTaskModal} openEditTaskModal={openEditTaskModal}/>}
+					{miniModalOpen && <MiniModal closeCard = {handleModalClose} openDeleteTaskModal={openDeleteTaskModal} openEditTaskModal={openEditTaskModal} card={ card }/>}
 				</div>
 				<p className="body-large text-tertiary-gray">
 					{card.description}

@@ -29,11 +29,12 @@ const Subtasks = ({ card, handleSubtaskToggle }) => {
 							checked={
 								sub.isCompleted
 							}
-							onChange={() =>
-								handleSubtaskToggle(
-									sub.id,
-									!sub.isCompleted
-								)
+							onChange={() => {
+									handleSubtaskToggle(
+										sub.id,
+										!sub.isCompleted
+									)
+								}
 							}
 						/>{" "}
 						{sub.title}
