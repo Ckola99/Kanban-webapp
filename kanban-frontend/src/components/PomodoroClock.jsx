@@ -1,11 +1,13 @@
 import React from 'react';
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import PropTypes from "prop-types";
+import useDarkMode from "../hooks/useDarkMode";
+
 
 const PomodoroClock = ({ progress, timerValue }) => {
 
-	const theme = window.localStorage.getItem('theme')
-	const textColor = theme === "dark" ? "#fff" : "#635FC7";
+	const [isDarkMode, toggleDarkMode] = useDarkMode();
+	const textColor = isDarkMode ? "#fff" : "#635FC7";
 
 	// Format time from seconds to MM:SS
 	const formatTime = (seconds) => {

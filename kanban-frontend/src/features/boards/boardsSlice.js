@@ -166,6 +166,7 @@ const boardsSlice = createSlice({
 			};
 
 			state.boards.push(newBoard);
+
 		},
 
 		editBoard: (state, action) => {

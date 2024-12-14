@@ -94,7 +94,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 										>
 											<button
 												className={` w-[240px] h-12 flex items-center pl-5 capitalize ${
-													board.id ===
+													board?.id ===
 													currentBoard.id
 														? "bg-primary-blue rounded-r-full text-white"
 														: " text-tertiary-gray"

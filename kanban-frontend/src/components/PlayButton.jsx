@@ -6,7 +6,7 @@ const PlayButton = () => {
 
 	return (
 		<button
-				className="p-2 bg-gray-700 text-white rounded-full flex gap-1"
+				className="p-2 dark:bg-gray-700 dark:text-white bg-secondary-light-gray rounded-full flex gap-1"
 				onClick={() => dispatch(startTimer())}
 		>
 

@@ -40,7 +40,7 @@ const WorkTasks = () => {
 	};
 
 	return (
-		<div className={`grid grid-cols-2 gap-2 ${selectedTaskId && 'overflow-scroll'}`}>
+		<div className={`grid grid-cols-2 gap-2 ${selectedTaskId && 'overflow-scroll overflow-x-hidden scrollbar-webkit'}`}>
 
 			{allTasksComplete ? (
 				<div className="col-span-2 text-center text-primary-blue dark:text-white text-lg font-bold flex items-center justify-center">
@@ -51,7 +51,7 @@ const WorkTasks = () => {
 					<div
 						key={task.id}
 						onClick={() => handleTaskClick(task.id)}
-						className={`transition-all duration-300 ease-in-out ${selectedTaskId === task.id ? 'row-span-2 z-10 relative ' : 'col-span-1 hover:cursor-pointer '} group bg-white dark:bg-secondary-black dark:text-white rounded-lg p-4 shadow-md dark:shadow-md  relative`}
+						className={`transition-all duration-300 ease-in-out ${selectedTaskId === task.id ? 'row-span-2 z-10 relative ' : 'col-span-1 hover:cursor-pointer '} group bg-white dark:bg-secondary-black dark:text-white rounded-lg p-4 shadow-md dark:shadow-md relative `}
 					>
 						<h2
 							onClick={(e) => { selectedTaskId && e.stopPropagation() }}

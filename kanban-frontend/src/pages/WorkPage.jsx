@@ -1,5 +1,5 @@
 // Import necessary libraries
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
 	selectPomodoroState,
@@ -17,12 +17,14 @@ import ResetButton from '../components/ResetButton'
 import SettingsButton from '../components/SettingsButton'
 import PomodoroClock from '../components/PomodoroClock'
 import WorkTasks from '../components/WorkTasks'
+import PomodoroSettings from '../components/PomodoroSettings'
 
 
 
 const WorkPage = () => {
 
 	const dispatch = useDispatch();
+	const [settingsOpen, setSettingsOpen] = useState(false)
 
 	const {
 		activeSession,
@@ -86,6 +88,14 @@ const WorkPage = () => {
 		}
 	}, [timerValue, activeSession, completedSessions, dispatch]);
 
+	const handleSettingsButton = () => {
+		setSettingsOpen(true)
+	}
+
+	const closeSettings = () => {
+		setSettingsOpen(false)
+	}
+
 
 	return (
 		<div className="relative font-plus-jakarta dark:bg-primary-black min-h-screen bg-primary-light-gray grid place-content-center ">
@@ -93,7 +103,11 @@ const WorkPage = () => {
 			<div className="max-w-[90%] max-h-[90%] grid grid-cols-2 gap-2 mx-auto">
 				<div className="dark:bg-secondary-black bg-white flex flex-col items-center p-5 rounded-lg relative min-w-[350px]">
 
-					<h1 className="text-white mb-2">{activeSession === 'work' ? `Promodoro ${completedSessions + 1}` : activeSession === 'shortBreak' ? ' Short Break' : 'Long Break'}</h1>
+
+
+					{settingsOpen ? ( <PomodoroSettings close={closeSettings}/> ) : (
+						<div>
+						<h1 className="text-center text-white mb-2">{activeSession === 'work' ? `Pomodoro ${completedSessions + 1}` : activeSession === 'shortBreak' ? ' Short Break' : 'Long Break'}</h1>
 
 					<PomodoroClock progress={progress} timerValue={timerValue} />
 
@@ -111,9 +125,14 @@ const WorkPage = () => {
 						<ResetButton />
 					</div>
 
-					<SettingsButton />
+
 
 					<DarkModeToggle />
+					</div>
+					)}
+
+
+					<SettingsButton openSettings={handleSettingsButton} settingsOpen={settingsOpen}/>
 				</div>
 
 				{/* Tasks */}

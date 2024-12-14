@@ -7,7 +7,7 @@ const ResetButton = () => {
 
 	return (
 		<button
-			className="p-2 bg-gray-700 text-white rounded-full flex gap-1"
+			className="p-2 dark:bg-gray-700 dark:text-white bg-secondary-light-gray rounded-full flex gap-1"
 			onClick={() => dispatch(resetTimer())}
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
