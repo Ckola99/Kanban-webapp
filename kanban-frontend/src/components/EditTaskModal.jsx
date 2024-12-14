@@ -71,10 +71,10 @@ const EditTaskModal = ({ taskCard, closeEditTaskModal }) => {
   	return (
 		<div
 			onClick={closeEditTaskModal}
-			className="fixed inset-0 bg-black bg-opacity-50 flex-center p-4 z-[60] "
+			    className="fixed inset-0 bg-black bg-opacity-50 flex-center p-4 z-[60] "
 		>
 			<div
-				className="bg-white dark:bg-secondary-black p-4 rounded-lg w-full max-w-[480px]"
+				    className="bg-white dark:bg-secondary-black p-4 rounded-lg w-full max-w-[480px] scrollbar-thin scrollbar-webkit"
 				onClick={(e) => e.stopPropagation()}
 			>
 				<form
