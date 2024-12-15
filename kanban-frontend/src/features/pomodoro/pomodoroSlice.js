@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	workBoard: false, // Tracks whether the Pomodoro modal is open
+	workBoard: false, // Tracks whether the Pomodoro modal is open 
 	activeSession: "work", // Tracks the current session type ('work', 'shortBreak', 'longBreak')
 	isTimerRunning: false, // Indicates if the timer is active
 	completedSessions: 0, // Tracks the number of completed work sessions

@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const savedBoardIndex = window.localStorage.getItem("currentBoardIndex");
 const initialState = {
-	boards: data.boards,
+	boards: JSON.parse(localStorage.getItem('boards')) || data.boards,
 	currentBoardIndex: savedBoardIndex ? parseInt(savedBoardIndex, 10) : 0,
 	editBoardModal: false,
 	addBoardModal: false,
@@ -151,6 +151,7 @@ const boardsSlice = createSlice({
 					window.localStorage.removeItem("currentBoardIndex");
 				}
 			}
+			localStorage.setItem('boards', JSON.stringify(state.boards));
 		},
 
 
@@ -166,6 +167,7 @@ const boardsSlice = createSlice({
 			};
 
 			state.boards.push(newBoard);
+			localStorage.setItem('boards', JSON.stringify(state.boards));
 
 		},
 
@@ -194,6 +196,8 @@ const boardsSlice = createSlice({
 						};
 					});
 				}
+
+				localStorage.setItem('boards', JSON.stringify(state.boards));
 			}
 		},
 

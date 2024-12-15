@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
 	updateSubtask,
 	currentBoardSelector
@@ -38,6 +38,12 @@ const WorkTasks = () => {
 			})
 		);
 	};
+
+	useEffect(() => {
+        	if (!incompleteTasks.some(task => task.id === selectedTaskId)) {
+            		setSelectedTaskId(null);
+        	}
+   	}, [incompleteTasks, selectedTaskId]);
 
 	return (
 		<div className={`grid grid-cols-2 gap-2 ${selectedTaskId && 'overflow-scroll overflow-x-hidden scrollbar-webkit'}`}>

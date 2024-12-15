@@ -1,5 +1,6 @@
 // Import necessary libraries
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
 import {
 	selectPomodoroState,
@@ -24,6 +25,7 @@ import PomodoroSettings from '../components/PomodoroSettings'
 const WorkPage = () => {
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate()
 	const [settingsOpen, setSettingsOpen] = useState(false)
 
 	const {
@@ -107,7 +109,7 @@ const WorkPage = () => {
 
 					{settingsOpen ? ( <PomodoroSettings close={closeSettings}/> ) : (
 						<div>
-						<h1 className="text-center text-white mb-2">{activeSession === 'work' ? `Pomodoro ${completedSessions + 1}` : activeSession === 'shortBreak' ? ' Short Break' : 'Long Break'}</h1>
+						<h1 className="text-center dark:text-white mb-2 font-bold">{activeSession === 'work' ? `Pomodoro ${completedSessions + 1}` : activeSession === 'shortBreak' ? ' Short Break' : 'Long Break'}</h1>
 
 					<PomodoroClock progress={progress} timerValue={timerValue} />
 
@@ -139,6 +141,8 @@ const WorkPage = () => {
 				<WorkTasks />
 
 			</div>
+
+			<button onClick={() => navigate('/')} className=" rounded-full med-heading bg-primary-blue w-[240px] h-10 flex items-center text-white absolute top-3 left-3 justify-center">Boards</button>
 		</div>
 	);
 };

@@ -1,30 +1,27 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { updateSettings } from "../features/pomodoro/pomodoroSlice";
+import { updateSettings, selectPomodoroState } from "../features/pomodoro/pomodoroSlice";
+
 
 const Input = ({ label, register, type, errors }) => {
 	const hasError = !!errors[label];
 
 	return (
 		<div className="w-[280px] h-[55px] flex flex-col justify-between md:w-full gap-2">
-			<div className="flex justify-between">
+
 				<label
 					htmlFor={label}
 					className={`font-bold dark:text-white text-[12px] ${hasError ? "text-red" : ""}`}
 				>
 					{label}
 				</label>
-				{errors[label] && (
-					<span role="alert" className="text-red text-[12px] font-bold">
-						{errors[label].message}
-					</span>
-				)}
-			</div>
+
+
 			<input
-				className={`w-full h-[45px] border-2 ${hasError ? "border-red-600" : "dark:border-white"
+				className={`w-full h-[45px] border-2 ${hasError ? "border-red caret-red" : "dark:border-white"
 					} rounded-lg pl-2 text-[14px] font-bold focus:outline-none bg-inherit dark:caret-white dark:text-white`}
 				id={label}
 				type={type}
@@ -35,17 +32,17 @@ const Input = ({ label, register, type, errors }) => {
 };
 
 const schema = yup.object().shape({
-	workDuration: yup
+	"Work Duration (min):" : yup
 		.number()
 		.required("Work duration is required")
 		.min(1, "Must be at least 1 minute")
 		.max(120, "Must be less than 120 minutes"),
-	shortBreakDuration: yup
+	"Short Break (min):" : yup
 		.number()
 		.required("Short break duration is required")
 		.min(1, "Must be at least 1 minute")
 		.max(30, "Must be less than 30 minutes"),
-	longBreakDuration: yup
+	"Long Break (min):" : yup
 		.number()
 		.required("Long break duration is required")
 		.min(1, "Must be at least 1 minute")
@@ -54,16 +51,32 @@ const schema = yup.object().shape({
 
 const PomodoroSettings = ({ close }) => {
 	const dispatch = useDispatch();
+	const settings = useSelector(selectPomodoroState);
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm({
 		resolver: yupResolver(schema),
+		defaultValues: {
+			"Work Duration (min):" : settings.pomodoroSettings.workDuration,
+			"Short Break (min):" : settings.pomodoroSettings.shortBreakDuration,
+			"Long Break (min):" : settings.pomodoroSettings.longBreakDuration
+		}
 	});
 
 	const onSubmit = (data) => {
-		dispatch(updateSettings(data));
+
+		const workDuration = data["Work Duration (min):"];
+		const shortBreakDuration = data["Short Break (min):"];
+		const longBreakDuration = data["Long Break (min):"];
+
+		dispatch(updateSettings({
+			workDuration,
+			shortBreakDuration,
+			longBreakDuration
+		}));
 		close(); // Close the settings modal after updating
 	};
 
@@ -83,7 +96,7 @@ const PomodoroSettings = ({ close }) => {
 					errors={errors}
 				/>
 				<Input
-					label="Short Break (min): "
+					label="Short Break (min):"
 					register={register}
 					type="number"
 					errors={errors}
