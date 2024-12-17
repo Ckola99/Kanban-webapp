@@ -57,7 +57,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 
 	return (
 		<div className="h-16 w-full dark:bg-primary-gray flex px-4 justify-between bg-white fixed left-0 right-0 top-0 z-50">
-			<div
+			<nav
 				className={`h-full
 				md:flex hidden md:flex-col bg-white dark:bg-primary-gray md:-mx-4 border-r dark:border-secondary-gray ${
 					sidebarIsOpen
@@ -173,6 +173,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 									src={
 										hide
 									}
+									alt="hide button"
 								/>
 								Hide Sidebar
 							</button>
@@ -189,12 +190,12 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 					className="md:hidden"
 				/>
 				<div className={` flex-center  `}>
-					<h3
+					<h2
 						className={` dark:text-white text-[18px] font-bold mr-2 ml-4 md:pl-5 `}
 					>
 						{currentBoard?.name ||
 							"No board selected"}
-					</h3>
+					</h2>
 
 					<button
 						onClick={toggleDropdown}
@@ -221,7 +222,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 						/>
 					</button>
 				</div>
-			</div>
+			</nav>
 
 
 

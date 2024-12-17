@@ -14,7 +14,7 @@ const HomePage = () => {
 
 	return (
 
-		<div
+		<main
 			className={`relative font-plus-jakarta dark:bg-primary-black min-h-screen bg-primary-light-gray scrollbar-thin scrollbar-webkit`}
 		>
 			<Header
@@ -30,7 +30,7 @@ const HomePage = () => {
 
 			<Board />
 
-		</div>
+		</main>
 	);
 }
 
