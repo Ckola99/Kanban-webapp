@@ -56,8 +56,8 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 	}
 
 	return (
-		<div className="h-16 w-full dark:bg-primary-gray flex px-4 justify-between bg-white fixed left-0 right-0 top-0 z-50">
-			<nav
+		<nav className="h-16 w-full dark:bg-primary-gray flex px-4 justify-between bg-white fixed left-0 right-0 top-0 z-50">
+			<div
 				className={`h-full
 				md:flex hidden md:flex-col bg-white dark:bg-primary-gray md:-mx-4 border-r dark:border-secondary-gray ${
 					sidebarIsOpen
@@ -222,7 +222,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 						/>
 					</button>
 				</div>
-			</nav>
+			</div>
 
 
 
@@ -262,9 +262,9 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 							${isBoardEmpty && "opacity-50"} md:hidden
 						`}
 					/>
-					<p className="hidden md:block text-white med-heading">
+					<span className="hidden md:block text-white med-heading">
 						+ Add New Task{" "}
-					</p>
+					</span>
 				</button>
 				<button
 					aria-label="Menu"
@@ -309,7 +309,7 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 					board={currentBoard}
 				/>
 			)}
-		</div>
+		</nav>
 	);
 };
 

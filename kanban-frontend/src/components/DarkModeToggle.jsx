@@ -19,13 +19,13 @@ const DarkModeToggle = () => {
         <img src={lightIcon} alt="Light Icon" className="w-6 h-6" />
 
         {/* Toggle Switch */}
-        <button  onClick={toggleDarkMode} className="bg-primary-blue w-11 h-6 rounded-3xl flex items-center px-1 py-2">
+        <div  onClick={toggleDarkMode} className=" hover:cursor-pointer bg-primary-blue w-11 h-6 rounded-3xl flex items-center px-1 py-2">
           <div
             className={`w-4 h-4 bg-white rounded-full transition-all duration-300 ease-in-out ${
               isDarkMode ? 'transform translate-x-5' : 'transform translate-x-0'
             }`}
           ></div>
-        </button>
+        </div>
 
         {/* Dark mode icon */}
         <img src={darkIcon} alt="Dark Icon" className="w-6 h-6" />
