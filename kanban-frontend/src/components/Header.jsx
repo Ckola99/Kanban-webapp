@@ -51,7 +51,6 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 
 	const handleAddBoard = () => {
 		dispatch(addBoardModalOpen())
-		close()
 	}
 
 	return (

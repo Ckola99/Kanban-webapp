@@ -235,17 +235,9 @@ const boardsSlice = createSlice({
 				column => sourceColumn.includes(column.name)
 			);
 
-			const columns = state.boards[state.currentBoardIndex].columns
-
-			console.log(columns.map(column => column.name))
-
-			console.log("source column", sourceColumnIndex)
-
 			const destColumnIndex = state.boards[state.currentBoardIndex].columns.findIndex(
 				column => destinationColumn.includes(column.name)
 			);
-
-			console.log(destColumnIndex)
 
 			// Validate indices
 			if (sourceColumnIndex === -1 || destColumnIndex === -1) {

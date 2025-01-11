@@ -51,8 +51,6 @@ const Columns = () => {
 		// Get the target column based on the over element (hovered column)
 		const targetColumnId = over.id;
 
-		console.log(`this is the task ${taskId}, this is the hovered area ${targetColumnId}`)
-
 		dispatch(
 			updateColumnTasks({
 				taskId,
