@@ -57,7 +57,7 @@ const WorkTasks = () => {
 					<div
 						key={task.id}
 						onClick={() => handleTaskClick(task.id)}
-						className={`transition-all duration-300 ease-in-out ${selectedTaskId === task.id ? 'row-span-2 z-10 relative ' : 'col-span-1 hover:cursor-pointer '} group bg-white dark:bg-secondary-black dark:text-white rounded-lg p-4 shadow-md dark:shadow-md relative `}
+						className={`transition-all duration-300 ease-in-out ${selectedTaskId === task.id ? 'row-span-2 z-10 relative ' : 'col-span-1 hover:cursor-pointer '} group bg-white dark:bg-secondary-black dark:text-white rounded-lg p-4 shadow-md dark:shadow-md relative max-h-fit `}
 					>
 						<h2
 							onClick={(e) => { selectedTaskId && e.stopPropagation() }}
