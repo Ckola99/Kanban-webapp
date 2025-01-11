@@ -228,14 +228,24 @@ const boardsSlice = createSlice({
 		updateColumnTasks: (state, action) => {
 			const { taskId, sourceColumn, destinationColumn } = action.payload;
 
+
+
 			// Find source and destination column indices
 			const sourceColumnIndex = state.boards[state.currentBoardIndex].columns.findIndex(
-				column => column.name === sourceColumn
+				column => sourceColumn.includes(column.name)
 			);
 
+			const columns = state.boards[state.currentBoardIndex].columns
+
+			console.log(columns.map(column => column.name))
+
+			console.log("source column", sourceColumnIndex)
+
 			const destColumnIndex = state.boards[state.currentBoardIndex].columns.findIndex(
-				column => column.name === destinationColumn
+				column => destinationColumn.includes(column.name)
 			);
+
+			console.log(destColumnIndex)
 
 			// Validate indices
 			if (sourceColumnIndex === -1 || destColumnIndex === -1) {

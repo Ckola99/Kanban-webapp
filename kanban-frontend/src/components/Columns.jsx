@@ -33,6 +33,8 @@ const Columns = () => {
 	const handleDragEnd = (event) => {
 		const { active, over } = event;
 
+		console.log(active)
+
 		if (!over) return; // If there's no target (hovered area), exit
 
 		const taskId = active.id;
@@ -48,6 +50,8 @@ const Columns = () => {
 
 		// Get the target column based on the over element (hovered column)
 		const targetColumnId = over.id;
+
+		console.log(`this is the task ${taskId}, this is the hovered area ${targetColumnId}`)
 
 		dispatch(
 			updateColumnTasks({

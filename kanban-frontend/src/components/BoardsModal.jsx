@@ -19,9 +19,9 @@ const BoardsModal = ({ close }) => {
 		); // Find the index by name
 		if (boardIndex !== -1) {
 			dispatch(setCurrentBoard(boardIndex)); // Dispatch the index
-			close();
+			close()
 		} else {
-			console.error("Board not found:", name);
+			console.error("Board not found:");
 		}
 	}
 

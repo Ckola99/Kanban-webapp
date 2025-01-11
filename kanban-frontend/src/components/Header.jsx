@@ -44,7 +44,6 @@ const Header = ({ setIsDropdownOpen, isDropdownOpen }) => {
 		); // Find the index by name
 		if (boardIndex !== -1) {
 			dispatch(setCurrentBoard(boardIndex)); // Dispatch the index
-			close();
 		} else {
 			console.error("Board not found:");
 		}
