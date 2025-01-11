@@ -46,7 +46,7 @@ const WorkTasks = () => {
    	}, [incompleteTasks, selectedTaskId]);
 
 	return (
-		<div className={`grid grid-cols-2 gap-2 ${selectedTaskId && 'overflow-scroll overflow-x-hidden scrollbar-webkit'}`}>
+		<div className={`grid grid-cols-2 gap-2 ${selectedTaskId && 'overflow-scroll overflow-x-hidden scrollbar-webkit'} h-fit`}>
 
 			{allTasksComplete ? (
 				<div className="col-span-2 text-center text-primary-blue dark:text-white text-lg font-bold flex items-center justify-center">
